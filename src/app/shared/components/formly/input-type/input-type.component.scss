@@ -1,0 +1,16 @@
+p-inputNumber, p-password {
+  width: 100%;
+  ::ng-deep {
+    .p-inputnumber, .p-password {
+      width: 100%;
+    }
+  }
+}
+:host::ng-deep {
+  .p-inputtext {
+    width: 100%;
+  }
+}
+.text-right ::ng-deep input {
+  text-align: end;
+}

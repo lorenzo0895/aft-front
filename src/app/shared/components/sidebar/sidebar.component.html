@@ -1,0 +1,12 @@
+<nav [class.open]="open">
+  <ul>
+    <li *ngFor="let item of items">
+      <div class="li-div" [routerLink]="item.route" routerLinkActive="selected">
+        <div class="icon-div">
+          <mat-icon [fontIcon]="item.icon"></mat-icon>
+        </div>
+        <span>{{item.label}}</span>
+      </div>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,41 @@
+.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
+p-radiobutton label {
+  position: relative !important;
+  margin-top: 0 !important;
+}
+formly-field-primeng-radio {
+  margin-top: 12px;
+  display: flex;
+  column-gap: 12px;
+}
+
+.p-inputtext, .p-inputnumber, .p-dropdown, .p-calendar {
+  width: 100%;
+}
+
+.p-error {
+  padding-left: 0.75rem;
+}
+.p-field-checkbox {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  p-checkbox {
+    height: 2.96rem;
+  }
+}
+formly-field:empty {
+  display: none !important;
+}

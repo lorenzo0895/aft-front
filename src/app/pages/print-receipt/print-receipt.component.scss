@@ -1,0 +1,47 @@
+$border-color: rgb(106, 106, 106);
+:host {
+  display: flex;
+  justify-content: center;
+}
+.window {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 10px;
+}
+.page-a4 {
+  width: calc(210mm / 1);
+  height: calc(calc(297mm / 1) - 3px);
+  border: solid grey 1px;
+  background: white;
+  padding: 4rem;
+  font-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  app-print-header {
+    display: block;
+    border-bottom: 1px solid $border-color;
+  }
+  app-print-payments {
+    display: block;
+    padding: 1rem;
+  }
+  .signature-div {
+    margin-top: 4rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-end;
+    .signature-container {
+      width: 40%;
+      border-top: solid 1px $border-color;
+      text-align: center;
+      align-self: flex-end;
+    }
+  }
+  app-print-die {
+    margin: 0 -4rem;
+    padding: 2rem 4rem 0 4rem;
+    border-top: 1px dashed $border-color;
+  }
+}

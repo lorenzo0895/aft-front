@@ -1,0 +1,27 @@
+.window {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .main-div {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    z-index: 1;
+    main {
+      height: 100%;
+      width: 100%;
+      padding: 32px;
+      overflow: auto;
+    }
+  }
+  mat-progress-bar {
+    position: absolute;
+    top: 50px;
+    left: 0;
+  }
+}
+::ng-deep p-chip .p-component {
+  font-size: 0.7rem;
+}

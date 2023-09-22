@@ -1,0 +1,17 @@
+$border-color: rgb(106, 106, 106);
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.info-container {
+  width: 50%;
+  p {
+    line-height: 2em;
+  }
+}
+.signature-container {
+  width: 40%;
+  border-top: solid 1px $border-color;
+  text-align: center;
+  align-self: flex-end;
+}

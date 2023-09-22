@@ -1,0 +1,20 @@
+<div class="space-between">
+  <h1 class="mat-h1">Fechas</h1>
+  <p-button
+  *ngIf="authService.hasRole('openDay')"
+    label="Añadir"
+    icon="pi pi-plus"
+    styleClass="p-button-sm p-button-help"
+    (click)="onCreate()"
+  ></p-button>
+</div>
+
+<div class="ag-grid-div">
+  <ag-grid-angular
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="rowData"
+    [gridOptions]="gridOptions"
+    [style]="'height: 100%; width: 100%'"
+  ></ag-grid-angular>
+</div>

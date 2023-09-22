@@ -1,0 +1,88 @@
+<div class="space-between">
+  <h1 class="mat-h1">
+    Detalle de Comprobante de Caja
+    <app-chip
+      *ngIf="receipt?.cancelReceipt"
+      value="Cancela {{padNumber(receipt?.cancelReceipt?.number)}}"
+      color="rgb(255, 98, 89)"
+      icon="pi-times"
+      [style.cursor]="'pointer'"
+      (click)="navigate(['..', receipt.cancelReceipt.id])"
+    ></app-chip>
+    <app-chip
+      *ngIf="receipt?.isCancelled && !receipt?.cancelReceipt"
+      value="Cancelado por {{padNumber(receipt?.cancelledBy?.number)}}"
+      color="rgb(255, 98, 89)"
+      icon="pi-times"
+      [style.cursor]="'pointer'"
+      (click)="navigate(['..', receipt.cancelledBy.id])"
+    ></app-chip>
+  </h1>
+  <div class="buttons-div">
+    <p-button
+      *ngIf="authService.hasRole('cancelReceipt')"
+      label="Reverso"
+      icon="pi pi-backward"
+      styleClass="p-button-sm p-button-danger"
+      [disabled]="!receipt?.isActive"
+      (onClick)="onCancel()"
+    ></p-button>
+    <p-button
+      *ngIf="authService.hasRole('closeReceipt') && receipt?.isActive"
+      label="Cerrar"
+      icon="pi pi-check"
+      styleClass="p-button-sm p-button-success"
+      [disabled]="!receipt?.isActive"
+      (onClick)="onClose()"
+    ></p-button>
+    <p-button
+      *ngIf="authService.hasRole('reopenReceipt') && !receipt?.isActive"
+      label="Reabrir"
+      icon="pi pi-check"
+      styleClass="p-button-sm p-button-success"
+      [disabled]="receipt?.isCancelled"
+      (onClick)="onOpen()"
+    ></p-button>
+    <p-button
+      label="Imprimir"
+      icon="pi pi-print"
+      styleClass="p-button-sm"
+      (onClick)="navigate(['print'])"
+    ></p-button>
+  </div>
+</div>
+
+<formly-form
+  [fields]="fields"
+  [model]="frozenModel"
+></formly-form>
+<formly-form
+  [fields]="descriptionField"
+  [options]="optionsDetails"
+  [model]="descriptionModel"
+></formly-form>
+
+<br>
+
+<div class="space-between">
+  <h2 class="mat-h2">Netos</h2>
+  <div class="buttons-div">
+    <p-button
+      *ngIf="authService.hasRole('addConcept')"
+      label="Añadir"
+      icon="pi pi-plus"
+      styleClass="p-button-sm p-button-help"
+      [disabled]="!receipt?.isActive"
+      (onClick)="onCreateConcept()"
+    ></p-button>
+  </div>
+</div>
+<div class="ag-grid-div">
+  <ag-grid-angular
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="rowDataConcepts"
+    [gridOptions]="gridOptions"
+    [style]="'height: 100%; width: 100%'"
+  ></ag-grid-angular>
+</div>

@@ -1,0 +1,10 @@
+::ng-deep {
+  .html-type h3 {
+    margin: 1rem 0 0 0;
+  }
+  .switch-flex {
+    app-switch-type {
+      padding-top: 0.5rem !important;
+    }
+  }
+}

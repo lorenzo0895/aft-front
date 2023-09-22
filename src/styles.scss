@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/scss/material.scss';
+@import './assets/scss/ag-grid.scss';
+@import './assets/scss/formly.scss';
+@import './assets/scss/primeng.scss';
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-material.css";
+@import "node_modules/@ng-select/ng-select/themes/default.theme.css";
+@import "./assets/scss//theme.css";
+
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background-color: #ededed;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  h1 {
+    margin: 0 !important;
+  }
+}
+.bg-blue {
+  background-color: #003b71;
+}
+.bg-green {
+  background-color: green;
+}
+.bg-red {
+  background-color: red;
+}
+.p-datepicker table td {
+  padding: 0;
+}
+.buttons-div {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 12px;
+}
+.orange {
+  color: orangered;
+}
+.link {
+  color: #003b71 !important;
+  text-decoration: underline #0069c2 !important;
+  cursor: pointer;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}

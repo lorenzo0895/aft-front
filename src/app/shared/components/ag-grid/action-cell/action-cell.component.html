@@ -1,0 +1,43 @@
+<span #span>
+  <ng-template
+    [ngIf]="_fits"
+    [ngIfElse]="notFits"
+  >
+    <ng-container *ngTemplateOutlet="iconsTemplate"></ng-container>
+  </ng-template>
+
+  <ng-template #notFits>
+    <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+    <mat-menu
+      #menu="matMenu"
+      yPosition="below"
+      xPosition="before"
+    >
+      <div mat-menu-item>
+        <ng-container *ngTemplateOutlet="iconsTemplate"></ng-container>
+      </div>
+    </mat-menu>
+  </ng-template>
+</span>
+
+<ng-template #iconsTemplate>
+  <ng-container *ngFor="let action of _actions">
+    <mat-icon
+      *ngIf="_actionCellEvents[action]?.origin !== 'primeng'"
+      [id]="action"
+      [class]="_actionCellEvents[action].className"
+      (click)="click(action)"
+      [pTooltip]="_actionCellEvents[action].tooltip ?? ''"
+      tooltipPosition="top"
+    >
+      {{ _actionCellEvents[action].icon }}
+    </mat-icon>
+    <i
+      *ngIf="_actionCellEvents[action]?.origin === 'primeng'"
+      [class]="_actionCellEvents[action].icon + ' ' + (_actionCellEvents[action].className ?? '')"
+      [pTooltip]="_actionCellEvents[action].tooltip ?? ''"
+      tooltipPosition="top"
+      (click)="click(action)"
+    ></i>
+  </ng-container>
+</ng-template>

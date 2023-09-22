@@ -1,0 +1,45 @@
+<ng-select
+  class="custom"
+  appendTo="body"
+  [items]="dataOptions | async"
+  [placeholder]="props.required ? props.placeholder + ' *' : props.placeholder ?? ''"
+  [multiple]="props.multiple"
+  [closeOnSelect]="props.multiple && !props.acceptCustomTags ? false : true"
+  [formControl]="$any(formControl)"
+  [formlyAttributes]="field"
+  [addTag]="props.acceptCustomTags ? addTagFn : false"
+  [dropdownPosition]="props.attributes.dropdownPosition"
+  [bindLabel]="$any(props.attributes.bindLabelOp)"
+  [bindValue]="$any(props.attributes.bindValueOp)"
+  [groupBy]="props.attributes.groupBy"
+  [searchable]="props.searchable"
+  [clearable]="props.clearable"
+  addTagText="Agregar etiqueta"
+  notFoundText="Sin resultados"
+  (blur)="onEvent($event, 'blur')"
+  (keyup)="onEvent($event, 'keyup')"
+  (keydown)="onEvent($event, 'keydown')"
+  (click)="onEvent($event, 'click')"
+  (change)="onEvent($event, 'change')"
+  (keypress)="onEvent($event, 'keypress')"
+>
+  <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+    <div *ngFor="let item of items | slice: 0: props.attributes.maxVisibleItems" class="ng-value">
+      <span class="ng-value-label">{{ $any(item)[props.attributes.bindLabelOp] }}</span>
+      <span *ngIf="props.attributes.clearable" class="ng-value-icon right" (click)="clear(item)"
+        > ×</span
+      >
+    </div>
+    <div class="ng-value" *ngIf="items.length > props.attributes.maxVisibleItems">
+      <span class="ng-value-label">
+        {{ items.length - props.attributes.maxVisibleItems }} más
+      </span>
+    </div>
+  </ng-template>
+</ng-select>
+<!-- <small *ngIf="showError" class="p-error">
+  <formly-validation-message
+    class="ui-message-text"
+    [field]="field"
+  ></formly-validation-message>
+</small> -->

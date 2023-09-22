@@ -1,0 +1,54 @@
+<h1 class="mat-h1">Útiles</h1>
+<div class="card-container">
+
+  <p-card
+    header="Reporte Minuta"
+    subheader="Reportes diarios, mensuales, semanales, etc"
+    (click)="minuta()"
+  >
+    <ng-template pTemplate="header">
+      <img
+        alt="Card"
+        src="assets/img/card1.png"
+      />
+    </ng-template>
+    <p>
+      Genere reportes de Comprobantes de Caja emitidos en un rango de fechas,
+      ordenados de diversas formas y con el detalle de cada uno de sus Netos.
+    </p>
+  </p-card>
+
+  <p-card
+    header="Importar a Xubio"
+    subheader="Exporta un excel listo para ser importado en Xubio"
+    (click)="xubio()"
+  >
+    <ng-template pTemplate="header">
+      <img
+        alt="Card"
+        src="assets/img/card2.png"
+      />
+    </ng-template>
+    <p>
+      Genera reportes de Honorarios cobrados por el estudio dentro de un rango
+      de fechas específico con formato apto para ser importado en Xubio.
+    </p>
+  </p-card>
+
+  <p-card
+    header="Liquidación Primaria de Granos"
+    subheader="Unifica Liquidaciones Primarias de Granos"
+    (click)="liqPrimGranos()"
+  >
+    <ng-template pTemplate="header">
+      <img
+        alt="Card"
+        src="assets/img/farm.jpg"
+      />
+    </ng-template>
+    <p>
+      Transforma múltiples LPG en un sólo excel listo para ser importado en Holistor
+    </p>
+  </p-card>
+
+</div>

@@ -1,0 +1,8 @@
+.p-button.p-button-help {
+  background: #4e4087;
+  border: 1px solid #4e4087;
+  &:enabled:hover {
+    background: #6a58ba;
+    border: 1px solid #6a58ba;
+  }
+}

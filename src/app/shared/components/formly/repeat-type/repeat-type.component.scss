@@ -1,0 +1,33 @@
+:host {
+  width: 100%;
+}
+i.pi {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all .2s;
+  &:hover {
+    opacity: 1;
+  }
+  &.red {
+    margin-top: 26px;
+  }
+}
+p {
+  margin: 12px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.blue {
+  color: #0D47A1
+}
+.red {
+  color: #B71C1C;
+}
+.field-group {
+  display: flex;
+  gap: 12px;
+}
+formly-field {
+  width: 100%;
+}

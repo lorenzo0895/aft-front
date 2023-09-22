@@ -1,0 +1,33 @@
+h3 {
+  margin: -24px -24px 0 -24px;
+  padding: 24px 24px 16px 24px;
+  cursor: move;
+}
+mat-dialog-content {
+  min-height: 80px;
+  border-top: 1px solid rgb(192, 192, 192);
+  border-bottom: 1px solid rgb(192, 192, 192);
+}
+mat-dialog-content {
+  p {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+:host ::ng-deep {
+  formly-field {
+    display: flex;
+    formly-group {
+      width: 100%;
+      formly-wrapper-mat-form-field {
+        flex: 1;
+      }
+    }
+    formly-wrapper-mat-form-field {
+      flex: 1;
+    }
+  }
+}

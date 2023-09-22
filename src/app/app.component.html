@@ -1,0 +1,22 @@
+<div class="window">
+  <app-navbar (menuClick)="isOpen = !isOpen"></app-navbar>
+  <mat-progress-bar
+    mode="indeterminate"
+    *ngIf="isLoading"
+  ></mat-progress-bar>
+  <div class="main-div">
+    <app-sidebar
+      [open]="isOpen"
+      *ngIf="isLogged$ | async"
+    ></app-sidebar>
+    <main>
+      <div
+        style="position: relative"
+        [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''"
+      >
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>
+<p-toast></p-toast>

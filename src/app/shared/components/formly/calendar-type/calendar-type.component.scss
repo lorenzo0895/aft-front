@@ -1,0 +1,9 @@
+p-calendar {
+  width: 100%;
+  ::ng-deep .p-calendar {
+    width: 100%;
+  }
+}
+::ng-deep .p-datepicker.p-component {
+  min-width: unset !important;
+}

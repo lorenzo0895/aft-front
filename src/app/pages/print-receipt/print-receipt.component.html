@@ -1,0 +1,36 @@
+<div class="window">
+  <div class="buttons-div">
+    <p-button
+      icon="pi pi-whatsapp"
+      styleClass="p-button-sm p-button-success"
+      (onClick)="onWhatsapp()"
+      [disabled]="!receipt?.client?.phone"
+    ></p-button>
+    <p-button
+      icon="pi pi-file-pdf"
+      styleClass="p-button-sm p-button-danger"
+      (click)="onPrint()"
+    ></p-button>
+  </div>
+
+  <div
+    #page
+    class="page-a4"
+  >
+    <div>
+      <app-print-header [receipt]="receipt"></app-print-header>
+      <app-print-general [receipt]="receipt"></app-print-general>
+      <app-print-payments [receipt]="receipt"></app-print-payments>
+      <div class="signature-div">
+        <section class="signature-container">
+          <p>
+            {{receipt?.user?.surname ? receipt?.user?.surname + ', ' +
+            receipt?.user?.name : receipt?.user?.name}}<br>
+            (Cobrador)
+          </p>
+        </section>
+      </div>
+    </div>
+    <app-print-die [receipt]="receipt"></app-print-die>
+  </div>
+</div>

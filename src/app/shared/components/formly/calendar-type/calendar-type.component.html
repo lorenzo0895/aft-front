@@ -1,0 +1,14 @@
+<p-calendar
+  #calendar
+  [selectionMode]="type"
+  [showTime]="showTime"
+  [timeOnly]="timeOnly"
+  [showSeconds]="showSeconds"
+  dateFormat="dd/mm/yy"
+  [appendTo]="'body'"
+  (onSelect)="onClose()"
+  [formlyAttributes]="field"
+  [formControl]="$any(formControl)"
+  [placeholder]="placeholder"
+  [numberOfMonths]="numberOfMonths"
+></p-calendar>

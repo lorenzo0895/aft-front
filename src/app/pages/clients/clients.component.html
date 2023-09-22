@@ -1,0 +1,23 @@
+<div class="space-between">
+  <h1 class="mat-h1">Clientes</h1>
+  <div class="right-div">
+    <formly-form [fields]="fields" [model]="model" (modelChange)="rowData = _rawRowData"></formly-form>
+    <p-button
+      *ngIf="authService.hasRole('createClient')"
+      label="Añadir"
+      icon="pi pi-plus"
+      styleClass="p-button-sm p-button-help"
+      (click)="onCreate()"
+    ></p-button>
+  </div>
+</div>
+
+<div class="ag-grid-div">
+  <ag-grid-angular
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="_rowData"
+    [gridOptions]="gridOptions"
+    [style]="'height: 100%; width: 100%'"
+  ></ag-grid-angular>
+</div>

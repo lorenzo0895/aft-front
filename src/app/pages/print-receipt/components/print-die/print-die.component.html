@@ -1,0 +1,19 @@
+<div class="container">
+  <section class="info-container">
+    <p>
+      Comprobante de Caja: {{padStart(receipt?.number ?? 0)}}<br>
+      Fecha: {{ receipt?.day?.day | date : 'dd/MM/YYYY' }}<br>
+      Cliente: {{ receipt?.client?.surname ? receipt?.client?.surname + ', ' +
+      receipt?.client?.name : receipt?.client?.name }}<br>
+      Importe: {{formatCurrency(total)}}
+    </p>
+
+  </section>
+  <section class="signature-container">
+    <p>
+      {{receipt?.user?.surname ? receipt?.user?.surname + ', ' +
+      receipt?.user?.name : receipt?.user?.name}}<br>
+      (Cobrador)
+    </p>
+  </section>
+</div>

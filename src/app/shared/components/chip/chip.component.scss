@@ -1,0 +1,14 @@
+.chip {
+  display: inline-flex;
+  gap: .2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 0.5rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  height: 1.14rem;
+  font-size: .7rem;
+  i {
+    font-size: .7rem;
+  }
+}

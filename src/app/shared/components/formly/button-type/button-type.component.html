@@ -1,0 +1,10 @@
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="disabled | async"
+    (click)="onClick($event)"
+  >
+    {{ label }}
+  </button>
+</div>

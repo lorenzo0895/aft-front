@@ -1,0 +1,13 @@
+.right-div {
+  display: flex;
+  gap: 1rem;
+  ::ng-deep {
+    .p-field-checkbox {
+      padding: 0;
+    }
+  }
+}
+.ag-grid-div {
+  width: 100%;
+  height: calc(100% - 70px);
+}

@@ -1,0 +1,40 @@
+<div class="space-between">
+  <h1 class="mat-h1">Netos</h1>
+  <div class="buttons-div">
+    <p-chip
+      *ngIf="filterModel.date"
+      label="{{filterModel.date[0].format('DD/MM/YY')}} al {{filterModel.date[1].format('DD/MM/YY')}}"
+      [removable]="true"
+      (onRemove)="onRemove('date')"
+    ></p-chip>
+    <p-chip
+      *ngIf="filterModel.client"
+      label="{{filterModel.client.label}}"
+      [removable]="true"
+      (onRemove)="onRemove('client')"
+    ></p-chip>
+    <p-button
+      label="Exportar"
+      icon="pi pi-file-export"
+      styleClass="p-button-sm p-button-success"
+      (click)="onExport()"
+    ></p-button>
+    <p-button
+      label="Buscar"
+      icon="pi pi-search"
+      styleClass="p-button-sm"
+      (click)="onOpenSearchModal()"
+    ></p-button>
+  </div>
+</div>
+
+<div class="ag-grid-div">
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="rowData"
+    [gridOptions]="gridOptions"
+    [style]="'height: 100%; width: 100%'"
+  ></ag-grid-angular>
+</div>

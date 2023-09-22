@@ -1,0 +1,19 @@
+<p>
+  {{props.label}}
+  <i
+    class="pi pi-plus-circle blue"
+    *ngIf="!props.disabled"
+    (click)="add()"
+  ></i>
+</p>
+<div
+  class="field-group"
+  *ngFor="let field of field.fieldGroup; let i = index;"
+>
+  <formly-field [field]="field"></formly-field>
+  <i
+    *ngIf="!props.disabled && notOnlyOne()"
+    class="pi pi-minus-circle red"
+    (click)="remove(i)"
+  ></i>
+</div>

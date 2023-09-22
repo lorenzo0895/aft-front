@@ -1,0 +1,44 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  p-card {
+    user-select: none;
+    cursor: pointer;
+    align-self: stretch;
+    img {
+      height: 160px;
+      object-fit: cover;
+    }
+    ::ng-deep {
+      .p-card {
+        height: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+}
+p-card{
+  width: 300px;
+}
+:host ::ng-deep {
+  .p-card .p-card-title {
+    font-size: 1.2rem;
+  }
+  .p-card .p-card-subtitle {
+    font-size: .8rem;
+  }
+  .p-card .p-card-content {
+    padding: 0.4rem 0;
+    p {
+      font-size: 0.7rem;
+      margin: 0;
+    }
+  }
+}
+::ng-deep {
+  .radio-inputs-special {
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}

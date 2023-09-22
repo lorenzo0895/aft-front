@@ -1,0 +1,21 @@
+<div>
+  <p>
+    Apellido y nombre/Razón social:
+    <span *ngIf="receipt">
+      {{receipt.client.surname ? receipt.client.surname + ', ' +
+      receipt.client.name : receipt.client.name }}
+    </span>
+  </p>
+  <p>
+    CUIT: {{ printCuit(receipt?.client?.cuit) }}
+  </p>
+</div>
+<div>
+  <p>
+    Recibimos la suma de: <span class="upper">{{printNumberToLetters()}}</span>
+  </p>
+  <p>
+    Para aplicarse al pago de los siguientes conceptos:
+    <span class="upper">{{receipt?.description ?? ''}}</span>
+  </p>
+</div>

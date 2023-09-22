@@ -1,0 +1,13 @@
+$border-color: rgb(106, 106, 106);
+div {
+  padding: 1rem;
+  border-bottom: 1px solid $border-color;
+  p {
+    margin: 0;
+    line-height: 1.5rem;
+  }
+  .upper {
+    // text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+}

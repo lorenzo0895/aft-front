@@ -1,0 +1,45 @@
+.ag-theme-material {
+  .ag-root-wrapper {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 6px 6px 6px rgba(128, 128, 128, 0.1);
+    background-color: #f8f8f8;
+    .ag-header-container {
+      background-color: #f8f8f8;
+    }
+    .ag-row-even {
+      background-color: #f4f4f4;
+    }
+  }
+  .ag-header-cell {
+    .ag-header-cell-label {
+      justify-content: center;
+      overflow: visible;
+    }
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .green {
+    color: green;
+  }
+  .red {
+    color: red;
+  }
+  .blue {
+    color: #003b71;
+  }
+}
+
+.ag-theme-material .ag-layout-auto-height .ag-center-cols-clipper {
+  min-height: calc(47px * 4);
+}
+.ag-cell-wrapper {
+  height: 100%;
+}

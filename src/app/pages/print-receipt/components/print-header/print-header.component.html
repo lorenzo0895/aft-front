@@ -1,0 +1,27 @@
+<div class="header">
+  <section class="company-info">
+    <div class="branding-container">
+      <img src="./assets/img/logo-purple-filled.png">
+      <p>Estudio Impositivo Spallione</p>
+    </div>
+    <p class="company-details">
+      Avda. 50 Nº 373<br>
+      2607 - Villa Cañás, Santa Fe<br>
+      3462 - 334842
+    </p>
+  </section>
+  <section class="receipt-info">
+    <p>Administración de Fondos de Terceros</p><br>
+    <p>
+      Comp. Caja Nº {{padStart(receipt?.number)}}<br>
+      Fecha: {{ receipt?.day?.day | date : 'dd/MM/YYYY' }}
+    </p>
+  </section>
+
+  <div class="x">
+    <span>X</span>
+  </div>
+  <div class="not-receipt">
+    <span>DOCUMENTO NO VÁLIDO COMO FACTURA</span>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="wrapper-border">
+  <div class="border-1"></div>
+  <div class="border-2">
+    <label [for]="id">{{ props.label }}</label>
+  </div>
+  <div class="border-3"></div>
+  <div class="input-container">
+    <ng-container #fieldComponent></ng-container>
+  </div>
+</div>
+
+
+<div class="p-field p-col-12 p-md-4">
+  <!-- <span
+    class="p-float-label"
+    #pFloatLabel
+  >
+    <label [for]="id">
+      {{ props.label }}
+      <span
+        *ngIf="props.required"
+        aria-hidden="true"
+      >*</span>
+    </label> -->
+  <!-- </span> -->
+
+  <small
+    *ngIf="showError"
+    class="p-error"
+  >
+    <formly-validation-message
+      class="ui-message-text"
+      [field]="field"
+    ></formly-validation-message>
+  </small>
+</div>

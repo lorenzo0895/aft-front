@@ -1,0 +1,75 @@
+$border-radius: .3rem;
+:host {
+  width: 100%;
+}
+:host ::ng-deep {
+  .p-inputtext {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: .5rem .2rem;
+  }
+}
+.wrapper-border {
+  margin-top: 1rem;
+  display: flex;
+  position: relative;
+  height: 2.4rem;
+  border-radius: $border-radius;
+  .border-1 {
+    min-width: .5rem;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+  .border-2 {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    label {
+      position: relative;
+      top: 0.6rem;
+      transition: all .2s;
+      padding: 0 .2rem;
+      color: #6c757d;
+      user-select: none;
+    }
+  }
+  &:has(::ng-deep input:focus, ::ng-deep input.p-filled) {
+    .border-2 {
+      border-top: none;
+      label {
+        top: -.7rem !important;
+        scale: 0.6;
+      }
+    }
+  }
+  &:has(::ng-deep input:focus) {
+    .border-1, .border-2, .border-3 {
+      // box-shadow: 0 0 0 0.2rem #a695e4;
+      border-color: #4e4087;
+      border-width: 2px;
+    }
+    .border-2 label {
+      color: #4e4087 !important;
+    }
+  }
+  .border-3 {
+    flex: 1;
+    min-width: .8rem;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+}
+.input-container {
+  position: absolute;
+  width: calc(100% - 1rem);
+  // height: 100%;
+  top: 0;
+  left: .5rem;
+}

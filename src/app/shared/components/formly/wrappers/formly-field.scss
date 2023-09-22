@@ -1,0 +1,23 @@
+:host {
+  width: 100%;
+  display: block;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  // ::ng-deep .p-float-label:has(formly-field-primeng-select) label {
+  //   max-width: calc(100% - 3rem) !important;
+  // }
+  &.wrapper-filled,
+  &.wrapper-focused {
+    .p-float-label label {
+      top: -0.75rem;
+    }
+  }
+  .p-float-label label {
+    z-index: 2;
+    max-width: calc(100% - 1.5rem);
+    white-space: nowrap;
+    overflow-x: clip;
+    overflow-y: visible;
+    text-overflow: ellipsis;
+  }
+}
