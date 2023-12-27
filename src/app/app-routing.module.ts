@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '@pages/login/login.component';
 import { PrintReceiptComponent } from '@pages/print-receipt/print-receipt.component';
 import { ReceiptDetailsComponent } from '@pages/receipt-details/receipt-details.component';
-import { JwtGuard } from '@shared/guards/jwt.guard';
+import { jwtGuard } from '@shared/guards/jwt.guard';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { DatesComponent } from './pages/dates/dates.component';
 import { OtherMoneyTransactionsComponent } from './pages/other-money-transactions/other-money-transactions.component';
@@ -22,55 +22,55 @@ const routes: Routes = [
     path: 'clients',
     component: ClientsComponent,
     title: 'Spallione | Clientes',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'dates',
     component: DatesComponent,
     title: 'Spallione | Fechas',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'items',
     component: ReceiptsItemsComponent,
     title: 'Spallione | Netos',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'receipts/:id/print',
     component: PrintReceiptComponent,
     title: 'Spallione | Comprobantes',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'receipts/:id',
     component: ReceiptDetailsComponent,
     title: 'Spallione | Netos',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'receipts',
     component: ReceiptsComponent,
     title: 'Spallione | Comprobantes',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   // {
   //   path: 'other',
   //   component: OtherMoneyTransactionsComponent,
   //   title: 'Spallione | Otros Movimientos',
-  //   canActivate: [JwtGuard],
+  //   canActivate: [jwtGuard],
   // },
   {
     path: 'utils',
     component: UtilsComponent,
     title: 'Spallione | Reportes',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   {
     path: 'users',
     component: UsersComponent,
     title: 'Spallione | Usuarios',
-    canActivate: [JwtGuard],
+    canActivate: [jwtGuard],
   },
   { path: '**', redirectTo: 'clients' },
 ];
