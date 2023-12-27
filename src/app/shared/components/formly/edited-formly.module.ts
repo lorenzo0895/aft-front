@@ -78,7 +78,7 @@ export const match = (
         {
           name: 'input',
           component: InputTypeComponent,
-          wrappers: ['float-wrapper'],
+          wrappers: ['form-field'],
         },
         {
           name: 'repeat',
@@ -88,17 +88,17 @@ export const match = (
         {
           name: 'select',
           component: FormlyFieldSelect,
-          wrappers: ['float-wrapper'],
+          wrappers: ['form-field'],
         },
         {
           name: 'calendar',
           component: CalendarTypeComponent,
-          wrappers: ['float-wrapper'],
+          wrappers: ['form-field'],
         },
         {
           name: 'autocomplete',
           component: AutocompleteTypeComponent,
-          wrappers: ['float-wrapper'],
+          wrappers: ['form-field'],
         },
         {
           name: 'file',
@@ -108,7 +108,7 @@ export const match = (
         {
           name: 'dropdown',
           component: DropdownTypeComponent,
-          wrappers: ['float-wrapper'],
+          wrappers: [],
         },
         { name: 'checkbox', component: FormlyFieldCheckbox, wrappers: [] },
         { name: 'radio', component: FormlyFieldRadio, wrappers: [] },

@@ -1,13 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/scss/material.scss';
-@import './assets/scss/ag-grid.scss';
-@import './assets/scss/formly.scss';
-@import './assets/scss/primeng.scss';
-@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-material.css";
-@import "node_modules/@ng-select/ng-select/themes/default.theme.css";
-@import "./assets/scss//theme.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '@angular/cdk/overlay-prebuilt.css';
+@import '@ng-select/ng-select/themes/default.theme.css';
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-material.css';
+@import 'src/assets/scss/ag-grid.scss';
+@import 'src/assets/scss/formly.scss';
+@import 'src/assets/scss/primeng.scss';
+@import 'src/assets/scss/theme.css';
 
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
 
 html,
 body {

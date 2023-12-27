@@ -71,7 +71,7 @@
       *ngIf="authService.hasRole('addConcept')"
       label="Añadir"
       icon="pi pi-plus"
-      styleClass="p-button-sm p-button-help"
+      styleClass="p-button-sm"
       [disabled]="!receipt?.isActive"
       (onClick)="onCreateConcept()"
     ></p-button>

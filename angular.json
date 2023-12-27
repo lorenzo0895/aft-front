@@ -20,9 +20,16 @@
             "outputPath": "dist/my-app-front",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "raf",
+              "rgbcolor",
+              "dompurify",
+              "html2canvas",
+              "moment"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -73,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my-app-front:build:production"
+              "buildTarget": "my-app-front:build:production"
             },
             "development": {
-              "browserTarget": "my-app-front:build:development"
+              "buildTarget": "my-app-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,14 +91,13 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-app-front:build"
+            "buildTarget": "my-app-front:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",

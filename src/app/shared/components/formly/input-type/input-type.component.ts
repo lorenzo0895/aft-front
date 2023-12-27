@@ -5,7 +5,7 @@ import { InputNumber } from 'primeng/inputnumber';
 
 interface InputTypeProps extends FormlyFieldProps {
   type: 'text' | 'number' | 'percentage' | 'password' | 'currency' | 'mask';
-  filter: string | RegExp;
+  filter: RegExp;
   toggleMask: boolean;
   feedback: boolean;
   attributes: {
