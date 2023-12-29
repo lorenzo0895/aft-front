@@ -10,6 +10,9 @@
       *ngIf="isLogged$ | async"
     ></app-sidebar>
     <main>
+      @if (isOpen) {
+        <div class="backdrop" (click)="isOpen = false"></div>
+      }
       <div
         style="position: relative"
         [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''"

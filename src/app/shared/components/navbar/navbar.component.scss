@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/variables.scss';
+@import 'src/assets/scss/variables.scss';
 
 * {
   transition: all 0.1s;
@@ -11,6 +11,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 16px;
   color: $chalk;
   div {
     height: 100%;
@@ -35,8 +36,24 @@ nav {
   }
   .user-info {
     margin-right: 12px;
+    .user-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: $chalk;
+      color: rgb(71, 71, 71);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     mat-icon {
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  img {
+    display: none;
   }
 }

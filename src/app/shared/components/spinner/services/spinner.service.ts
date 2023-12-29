@@ -31,7 +31,7 @@ export class SpinnerService {
     }
     let config = new OverlayConfig({
       width: '100vw',
-      height: '100vh',
+      height: '100dvh',
       positionStrategy: this._overlay.position().global().left('0').top('0'),
     });
     this._overlayRef = this._overlay.create(config);

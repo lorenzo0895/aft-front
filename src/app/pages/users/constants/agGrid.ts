@@ -3,11 +3,11 @@ import { CustomTextComponent } from 'src/app/shared/components/ag-grid/custom-te
 import { UsersComponent } from '../users.component';
 import { ActionCellComponent } from '@shared/components/ag-grid/action-cell/action-cell.component';
 
-export const colDefs = (parentComponent: UsersComponent): ColDef[] => [
+export const colDefs = (parentComponent: UsersComponent, isMobile = false): ColDef[] => [
   { field: 'username', headerName: 'Usuario', flex: 1,cellClass: 'text-left' },
-  { field: 'name', headerName: 'Nombre', flex: 1,cellClass: 'text-left' },
-  { field: 'surname', headerName: 'Apellido', flex: 1,cellClass: 'text-left' },
-  { field: 'email', headerName: 'Email', flex: 2,cellClass: 'text-left' },
+  { field: 'name', headerName: 'Nombre', flex: 1,cellClass: 'text-left', hide: isMobile },
+  { field: 'surname', headerName: 'Apellido', flex: 1,cellClass: 'text-left', hide: isMobile },
+  { field: 'email', headerName: 'Email', flex: 2,cellClass: 'text-left', hide: isMobile },
   {
     field: 'isActive',
     headerName: 'Habilitado',
@@ -16,6 +16,7 @@ export const colDefs = (parentComponent: UsersComponent): ColDef[] => [
     cellRendererParams: {
       type: 'trueFalse',
     },
+    hide: isMobile,
   },
   {
     headerName: 'Acciones',
@@ -50,3 +51,4 @@ export const colDefs = (parentComponent: UsersComponent): ColDef[] => [
     valueGetter: () => ['edit', 'password'],
   },
 ];
+

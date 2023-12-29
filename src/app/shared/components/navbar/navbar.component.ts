@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@shared/services/auth.service';
 import { Observable } from 'rxjs';
+import { UxService } from '@shared/services/ux.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,11 @@ export class NavbarComponent implements OnInit {
   @Output() menuClick: EventEmitter<void> = new EventEmitter();
   isLogged$!: Observable<boolean>;
   user$!: Observable<any>;
-  constructor(private _authService: AuthService) { }
+
+  constructor(
+    protected _uxService: UxService,
+    private _authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.isLogged$ = this._authService.isLogged$;

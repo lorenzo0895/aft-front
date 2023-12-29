@@ -9,6 +9,8 @@ import { UsersService } from '@shared/services/users.service';
 import { AuthService } from '@shared/services/auth.service';
 import { ModalService } from '@shared/components/modal/modal.service';
 import { passwordModalData, userModalData } from './constants/modals';
+import { UxService } from '@shared/services/ux.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -21,15 +23,24 @@ export class UsersComponent implements OnInit {
   rowData: any[] = [];
   colDefs: ColDef[] = colDefs(this);
   gridOptions: GridOptions = { ...defaultGridOptions };
+  subscription!: Subscription;
 
   constructor(
     public authService: AuthService,
     private _usersService: UsersService,
-    private _modalService: ModalService
+    private _modalService: ModalService,
+    private _uxService: UxService,
   ) {}
 
   ngOnInit(): void {
+    this.subscription = this._uxService.isMobile$.subscribe(isMobile => {
+      this.colDefs = colDefs(this, isMobile);
+    })
     this._usersService.getData().subscribe((res) => (this.rowData = res));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   onCreate() {

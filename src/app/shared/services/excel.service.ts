@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Column, Workbook, Worksheet } from 'excelJs';
+import { Column, Workbook, Worksheet } from 'exceljs';
 import * as moment from 'moment';
 import { FileSaverService } from 'ngx-filesaver';
 import { from, map } from 'rxjs';
+import { ExcelJsService } from './excel-js.service';
 
 export interface IConceptExport {
   number: string;
@@ -18,6 +19,45 @@ export interface ICellRef {
   col: number;
 }
 
+const a: Partial<Column>[] = [
+  { header: 'Fecha Emisión', key: 'date', width: 10, },
+  { header: 'Cpbte', key: '', width: 10, },
+  { header: 'Suc.', key: '', width: 10, },
+  { header: 'Número ', key: 'numberFrom', width: 10, },
+  { header: 'N° Hasta', key: '', width: 10, },
+  { header: 'Cód. Autorización', key: '', width: 10, },
+  { header: 'Tipo Doc. ', key: '', width: 10, },
+  { header: 'CUIT', key: '', width: 10, },
+  { header: 'Razón Social/Denominación Comprador', key: '', width: 10, },
+  { header: 'Tipo Cbio.', key: '', width: 10, },
+  { header: 'Moneda', key: '', width: 10, },
+  { header: 'Neto Gravado', key: '', width: 10, },
+  { header: 'Importes No Gravados', key: '', width: 10, },
+  { header: 'Importes Exentos', key: '', width: 10, },
+  { header: 'Otros Tributos', key: '', width: 10, },
+  { header: 'IVA  Crédito', key: '', width: 10, },
+  { header: 'Importe   Total', key: '', width: 10, },
+  { header: 'Neto Gravado', key: '', width: 10, },
+  { header: 'Importes No Gravados', key: '', width: 10, },
+  { header: 'Importes Exentos', key: '', width: 10, },
+  { header: 'IVA  Liquidado', key: '', width: 10, },
+  { header: 'Importe   Total', key: '', width: 10, },
+  { header: 'Pcia', key: '', width: 10, },
+  { header: 'Neto Cód. ', key: '', width: 10, },
+  { header: 'Alíc.', key: '', width: 10, },
+  { header: 'Neto a importar', key: '', width: 10, },
+  { header: 'IVA   Débito', key: '', width: 10, },
+  { header: 'NG/EX  Cód.', key: '', width: 10, },
+  { header: 'P/R Cód. ', key: '', width: 10, },
+  { header: 'Perc./Ret.', key: '', width: 10, },
+  { header: 'Pcia P/R', key: '', width: 10, },
+  { header: 'Cód Cte', key: '', width: 10, },
+  { header: 'Moneda', key: '', width: 10, },
+  { header: 'Pto. Vta', key: '', width: 10, },
+  { header: 'Cd Dc', key: '', width: 10, },
+  { header: 'DIFERENCIA', key: '', width: 10, },
+]
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +70,10 @@ export class ExcelService {
     bottom: { style: 'double' },
   };
 
-  constructor(private fileSaver: FileSaverService) {}
+  constructor(
+    private fileSaver: FileSaverService,
+    private excelService: ExcelJsService
+  ) { }
 
   jsonToExcel(json: any[], fileName: string) {
     const headers = Array.from(new Set(json.flatMap((it) => Object.keys(it))));
@@ -125,6 +168,20 @@ export class ExcelService {
       for (let c = start.col; c <= end.col; c++) {
         const cell = worksheet.getCell(r, c);
         cell.numFmt = '#,##0.00';
+      }
+    }
+  }
+
+  setBackgroundColor(worksheet: Worksheet, start: ICellRef, end: ICellRef, color: string) {
+    for (let r = start.row; r <= end.row; r++) {
+      for (let c = start.col; c <= end.col; c++) {
+        const cell = worksheet.getCell(r, c);
+        cell.style.fill = {
+          type: 'pattern',
+          pattern:'darkTrellis',
+          fgColor: { argb:color },
+          bgColor: { argb:color }
+        };
       }
     }
   }
@@ -334,5 +391,26 @@ export class ExcelService {
         this.fileSaver.save(blobData, fileName);
       })
     );
+  }
+
+  holistorVtaGeneral(file: File) {
+    this.excelService.readFile(file).subscribe((book) => {
+      const sheet = book.getWorksheet(1);
+      if (!sheet) return;
+      const bookExp = new Workbook();
+      const sheetExp = bookExp.addWorksheet('Comprobantes Ventas');
+      sheetExp.columns = a;
+      this.setBackgroundColor(sheetExp, { col: 1, row: 1 }, { col: 17, row: 1 }, 'fffcd6b4');
+      this.setBackgroundColor(sheetExp, { col: 18, row: 1 }, { col: 22, row: 1 }, 'fffccc99');
+      this.setBackgroundColor(sheetExp, { col: 23, row: 1 }, { col: 23, row: 1 }, 'ffccffcc');
+      this.setBackgroundColor(sheetExp, { col: 24, row: 1 }, { col: 24, row: 1 }, 'ffffff99');
+      this.setBackgroundColor(sheetExp, { col: 25, row: 1 }, { col: 27, row: 1 }, 'fffccc99');
+      this.setBackgroundColor(sheetExp, { col: 28, row: 1 }, { col: 28, row: 1 }, 'ffff99cc');
+      this.setBackgroundColor(sheetExp, { col: 29, row: 1 }, { col: 31, row: 1 }, 'ffcc99ff');
+      this.setBackgroundColor(sheetExp, { col: 32, row: 1 }, { col: 36, row: 1 }, 'ffccffcc');
+      sheetExp.getRow(1).height = 50;
+
+      this.excelService.downloadExcel(bookExp, 'HWVTAFIP');
+    });
   }
 }

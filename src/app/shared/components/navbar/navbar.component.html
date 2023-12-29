@@ -6,10 +6,18 @@
       (click)="onMenuClick()"
     ></mat-icon>
     <img src="assets/img/logo-black.png">
-    <span>Estudio Impositivo Spallione</span>
+    @if (_uxService.isMobile$ | async) {
+      <span>Spallione</span>
+    } @else {
+      <span>Estudio Impositivo Spallione</span>
+    }
   </div>
   <div class="user-info" *ngIf="isLogged$ | async">
-    <span>{{(user$ | async)?.name + ' ' + (user$ | async)?.surname}}</span>
+    @if (_uxService.isMobile$ | async) {
+      <div class="user-icon">{{((user$ | async)?.name ?? '') | titlecase | slice : 0 : 1}}</div>
+    } @else {
+      <span>{{(user$ | async)?.name + ' ' + (user$ | async)?.surname}}</span>
+    }
     <mat-icon
       fontIcon="logout"
       (click)="logout()"

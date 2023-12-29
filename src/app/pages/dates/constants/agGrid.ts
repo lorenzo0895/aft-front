@@ -9,7 +9,7 @@ import { currencyFormatter } from 'src/app/shared/formatters/currencyFormatter';
 import { dateFormatter } from 'src/app/shared/formatters/dateFormatter';
 import { DatesComponent } from '../dates.component';
 
-export const colDefs = (parentComponent: DatesComponent): ColDef[] => [
+export const colDefs = (parentComponent: DatesComponent, isMobile = false): ColDef[] => [
   {
     field: 'day',
     headerName: 'Día',
@@ -47,6 +47,7 @@ export const colDefs = (parentComponent: DatesComponent): ColDef[] => [
     flex: 1,
     cellClass: 'text-center',
     filter: 'agNumberColumnFilter',
+    hide: isMobile,
   },
   {
     field: 'totalReceived',
@@ -57,6 +58,7 @@ export const colDefs = (parentComponent: DatesComponent): ColDef[] => [
     valueFormatter: (params: ValueFormatterParams) => {
       return currencyFormatter(params.value);
     },
+    hide: isMobile,
   },
   // {
   //   field: 'totalAudited',

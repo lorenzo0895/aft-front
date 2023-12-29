@@ -1,4 +1,4 @@
-@use '../../../../assets/scss/variables.scss' as *;
+@use 'src/assets/scss/variables.scss' as *;
 
 nav {
   background-color: #6a58ba;
@@ -60,5 +60,11 @@ nav {
         white-space: nowrap;
       }
     }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  nav:not(.open) {
+    width: 0;
   }
 }

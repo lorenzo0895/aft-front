@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
@@ -10,6 +10,8 @@ import { closeModalData, newModalData } from './constants/modals';
 import { DaysService } from 'src/app/shared/services/days.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@shared/services/auth.service';
+import { UxService } from '@shared/services/ux.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dates',
@@ -18,23 +20,32 @@ import { AuthService } from '@shared/services/auth.service';
   templateUrl: './dates.component.html',
   styleUrls: ['./dates.component.scss'],
 })
-export class DatesComponent implements OnInit {
+export class DatesComponent implements OnInit, OnDestroy {
   colDefs: ColDef[] = colDefs(this);
   rowData: any[] = [];
   gridOptions: GridOptions = { ...defaultGridOptions };
+  subscription!: Subscription;
 
   constructor(
-    private _router: Router,
     public authService: AuthService,
+    protected uxService: UxService,
+    private _router: Router,
     private _daysService: DaysService,
     private _modalService: ModalService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    this.subscription = this.uxService.isMobile$.subscribe((isMobile) => {
+      this.colDefs = colDefs(this, isMobile);
+    })
     this._daysService.getData('?full=true').subscribe((res) => {
       this.rowData = res;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   onCreate() {
