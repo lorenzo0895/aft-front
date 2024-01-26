@@ -1,6 +1,13 @@
+:host {
+  ::ng-deep {
+    .mdc-dialog__title+.mdc-dialog__content, .mdc-dialog__header+.mdc-dialog__content {
+      padding-top: 24px;
+    }
+  } 
+}
 h3 {
   margin: 0;
-  // padding: 24px 24px 16px 24px;
+  padding-bottom: 12px;
   cursor: move;
 }
 mat-dialog-content {

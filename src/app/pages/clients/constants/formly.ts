@@ -56,7 +56,7 @@ export const newEditFields: FormlyFieldConfig[] = [
         type: 'dropdown',
         className: 'flex-1',
         props: {
-          label: 'Condición Fiscal',
+          placeholder: 'Condición Fiscal',
           options: [
             { value: 'CF', label: 'Consumidor Final' },
             { value: 'EX', label: 'Exento' },

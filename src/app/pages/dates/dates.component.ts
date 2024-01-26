@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
 import { colDefs } from './constants/agGrid';
@@ -16,7 +15,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dates',
   standalone: true,
-  imports: [CommonModule, AgGridModule, ButtonModule],
+  imports: [AgGridModule, ButtonModule],
   templateUrl: './dates.component.html',
   styleUrls: ['./dates.component.scss'],
 })

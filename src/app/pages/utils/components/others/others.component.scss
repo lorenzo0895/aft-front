@@ -4,3 +4,14 @@ p-tree ::ng-deep {
     // border: none !important;
   }
 }
+::ng-deep {
+  .align-self-stretch {
+    app-file-type {
+      display: flex;
+      .drop-container {
+        align-self: stretch;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ import { cuitFormatter } from '@shared/formatters/cuitFormatter';
   templateUrl: './print-general.component.html',
   styleUrls: ['./print-general.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 export class PrintGeneralComponent {
   @Input() receipt?: any;

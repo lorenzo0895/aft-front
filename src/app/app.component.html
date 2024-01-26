@@ -1,17 +1,15 @@
 <div class="window">
-  <app-navbar (menuClick)="isOpen = !isOpen"></app-navbar>
-  <mat-progress-bar
-    mode="indeterminate"
-    *ngIf="isLoading"
-  ></mat-progress-bar>
+  <app-navbar (menuClick)="openCloseSidebar()"></app-navbar>
+  @if (_loadingService.isLoading()) {
+    <mat-progress-bar mode="indeterminate"/>
+  }
   <div class="main-div">
-    <app-sidebar
-      [open]="isOpen"
-      *ngIf="isLogged$ | async"
-    ></app-sidebar>
+    @if (_authService.isLogged()) {
+      <app-sidebar [open]="isOpen()"/>
+    }
     <main>
-      @if (isOpen) {
-        <div class="backdrop" (click)="isOpen = false"></div>
+      @if (isOpen()) {
+        <div class="backdrop" (click)="openCloseSidebar()"></div>
       }
       <div
         style="position: relative"

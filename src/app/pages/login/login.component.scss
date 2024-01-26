@@ -2,7 +2,7 @@ div {
   display: flex;
   align-items: center;
   flex-direction: column;
-  formly-form {
+  app-formly {
     width: clamp(200px, 40%, 400px);
     ::ng-deep {
       .justify-center {

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { ConceptItemsService } from '@shared/services/concept-items.service';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
@@ -10,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@shared/components/modal/modal.service';
 import { openCloseModalData, searchModalData } from './constants/modals';
 import { InfoPageService } from '@shared/services/info-page.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ExcelService } from '@shared/services/excel.service';
 import { ConceptsService } from '@shared/services/concepts.service';
 import { AuthService } from '@shared/services/auth.service';
@@ -22,7 +21,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-receipts-items',
   standalone: true,
-  imports: [CommonModule, ButtonModule, AgGridModule, ChipModule],
+  imports: [ButtonModule, AgGridModule, ChipModule],
   templateUrl: './receipts-items.component.html',
   styleUrls: ['./receipts-items.component.scss'],
 })

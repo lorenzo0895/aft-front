@@ -1,13 +1,14 @@
 <div class="space-between">
   <h1 class="mat-h1">Usuarios</h1>
   <div class="right-div">
-    <p-button
-      *ngIf="authService.hasRole('createUser')"
-      label="Añadir"
-      icon="pi pi-plus"
-      styleClass="p-button-sm"
-      (click)="onCreate()"
-    ></p-button>
+    @if (authService.hasRoleSignal('createUser')()) {
+      <p-button
+        label="Añadir"
+        icon="pi pi-plus"
+        [size]="'small'"
+        (click)="onCreate()"
+      ></p-button>
+    }
   </div>
 </div>
 

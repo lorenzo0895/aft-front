@@ -68,10 +68,10 @@ export const conceptsColDefs = (
     },
     valueGetter: (params: ValueGetterParams) => {
       const array: string[] = [];
-      if (parentComponent.authService.hasRole('editConcept')) {
+      if (parentComponent.authService.hasRoleSignal('editConcept')()) {
         array.push('edit');
       }
-      if (parentComponent.authService.hasRole('deleteConcept')) {
+      if (parentComponent.authService.hasRoleSignal('deleteConcept')()) {
         array.push('delete');
       }
       return array;

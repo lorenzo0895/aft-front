@@ -1,28 +1,31 @@
 <div class="space-between">
   <h1 class="mat-h1">Netos</h1>
   <div class="buttons-div">
-    <p-chip
-      *ngIf="filterModel.date"
-      label="{{filterModel.date[0].format('DD/MM/YY')}} al {{filterModel.date[1].format('DD/MM/YY')}}"
-      [removable]="true"
-      (onRemove)="onRemove('date')"
-    ></p-chip>
-    <p-chip
-      *ngIf="filterModel.client"
-      label="{{filterModel.client.label}}"
-      [removable]="true"
-      (onRemove)="onRemove('client')"
-    ></p-chip>
+    @if (filterModel.date) {
+      <p-chip
+        [label]="filterModel.date[0].format('DD/MM/YY') + ' al ' + filterModel.date[1].format('DD/MM/YY')"
+        [removable]="true"
+        (onRemove)="onRemove('date')"
+      ></p-chip>
+    }
+    @if (filterModel.client) {
+      <p-chip
+        [label]="filterModel.client.label"
+        [removable]="true"
+        (onRemove)="onRemove('client')"
+      ></p-chip>
+    }
     <p-button
       label="Exportar"
       icon="pi pi-file-export"
-      styleClass="p-button-sm p-button-success"
+      [severity]="'success'"
+      [size]="'small'"
       (click)="onExport()"
     ></p-button>
     <p-button
       label="Buscar"
       icon="pi pi-search"
-      styleClass="p-button-sm"
+      [size]="'small'"
       (click)="onOpenSearchModal()"
     ></p-button>
   </div>

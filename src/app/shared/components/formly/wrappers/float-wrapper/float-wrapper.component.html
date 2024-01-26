@@ -10,27 +10,11 @@
 </div>
 
 
-<div class="p-field p-col-12 p-md-4">
-  <!-- <span
-    class="p-float-label"
-    #pFloatLabel
-  >
-    <label [for]="id">
-      {{ props.label }}
-      <span
-        *ngIf="props.required"
-        aria-hidden="true"
-      >*</span>
-    </label> -->
-  <!-- </span> -->
-
-  <small
-    *ngIf="showError"
-    class="p-error"
-  >
-    <formly-validation-message
-      class="ui-message-text"
-      [field]="field"
-    ></formly-validation-message>
-  </small>
-</div>
+@if (showError) {
+  <div class="p-field p-col-12 p-md-4">
+    <small class="p-error">
+      <formly-validation-message class="ui-message-text"
+        [field]="field"></formly-validation-message>
+    </small>
+  </div>
+}

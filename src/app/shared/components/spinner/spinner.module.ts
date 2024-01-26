@@ -7,7 +7,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { SpinnerComponent } from './spinner.component';
 import { SpinnerService } from './services/spinner.service';
 
-
 @NgModule({
   declarations: [SpinnerComponent],
   imports: [CommonModule, MatProgressSpinnerModule, OverlayModule],

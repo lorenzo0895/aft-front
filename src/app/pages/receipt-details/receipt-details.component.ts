@@ -1,11 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  FormlyFieldConfig,
-  FormlyFormOptions,
-  FormlyModule,
-} from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { ModalService } from '@shared/components/modal/modal.service';
 import { defaultGridOptions } from '@shared/constants/agGrid';
 import { ConceptsService } from '@shared/services/concepts.service';
@@ -26,14 +21,15 @@ import {
 } from './constants/modals';
 import { ConceptItemsService } from '@shared/services/concept-items.service';
 import { MessageService } from 'primeng/api';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AuthService } from '@shared/services/auth.service';
 import { ChipComponent } from '@shared/components/chip/chip.component';
+import { EditedFormlyModule } from '@shared/components/formly/edited-formly.module';
 
 @Component({
   selector: 'app-receipt-details',
   standalone: true,
-  imports: [CommonModule, ButtonModule, FormlyModule, AgGridModule, ChipComponent],
+  imports: [ButtonModule, EditedFormlyModule, AgGridModule, ChipComponent],
   templateUrl: './receipt-details.component.html',
   styleUrls: ['./receipt-details.component.scss'],
 })

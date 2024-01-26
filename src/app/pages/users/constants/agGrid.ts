@@ -24,7 +24,7 @@ export const colDefs = (parentComponent: UsersComponent, isMobile = false): ColD
     maxWidth: 110,
     filter: false,
     sortable: false,
-    hide: !parentComponent.authService.hasRole('editUser'),
+    hide: !parentComponent.authService.hasRoleSignal('editUser')(),
     cellRenderer: ActionCellComponent,
     cellRendererParams: {
       actionCellEvents: {

@@ -1,20 +1,6 @@
 <span [class]="alignment">
-  <span *ngIf="withTxt">{{ value }}</span>
-  <!-- <mat-icon
-    *ngIf="!withImg"
-    style="padding-left: 10px"
-    [matTooltip]="tooltip"
-    matTooltipPosition="above"
-    [ngClass]="iconClass"
-  >
-    {{ iconImg }}
-  </mat-icon> -->
-  <i class="pi {{iconClass}} {{iconImg}}"></i>
-  <!-- <img
-    *ngIf="withImg"
-    style="padding-left: 10px"
-    [src]="'assets/ICONS/' + iconImg + '.png'"
-    [matTooltip]="tooltip"
-    matTooltipPosition="above"
-  /> -->
+  @if (withImg) {
+    <span>{{ value }}</span>
+  }
+  <i [class]="'pi ' + iconClass + ' ' + iconImg"></i>
 </span>

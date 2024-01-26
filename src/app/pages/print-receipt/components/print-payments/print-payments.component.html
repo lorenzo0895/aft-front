@@ -1,34 +1,41 @@
-<div class="payment-div" *ngIf="receipt?.cash > 0">
-  <span>Efectivo:</span>
-  <span>{{formatCurrency(receipt?.cash ?? 0)}}</span>
-</div>
-<div class="payment-div" *ngIf="receipt?.transferAmount > 0">
-  <span>Transferencia:</span>
-  <span>{{formatCurrency(receipt?.transferAmount ?? 0)}}</span>
-</div>
-<div class="payment-div" *ngIf="receipt?.cheques?.length > 0">
-  <span>Cheques:</span>
-  <span>{{formatCurrency(totalCheques)}}</span>
-</div>
-
-<table *ngIf="receipt?.cheques?.length > 0">
-  <tr>
-    <th>Fecha Diferida</th>
-    <th>Cheque Nº</th>
-    <th>Banco</th>
-    <th>Sucursal</th>
-    <th>CUIT</th>
-    <th>Importe</th>
-  </tr>
-  <tr *ngFor="let cheque of receipt.cheques">
-    <td>{{formatDate(cheque.date)}}</td>
-    <td>{{cheque.number}}</td>
-    <td>{{cheque.bank}}</td>
-    <td>{{cheque.branchOffice}}</td>
-    <td>{{formatCuit(cheque.cuit)}}</td>
-    <td class="cell-right">{{formatCurrency(cheque.amount)}}</td>
-  </tr>
-</table>
+@if (receipt?.cash > 0) {
+  <div class="payment-div">
+    <span>Efectivo:</span>
+    <span>{{formatCurrency(receipt?.cash ?? 0)}}</span>
+  </div>
+}
+@if (receipt?.transferAmount > 0) {
+  <div class="payment-div">
+    <span>Transferencia:</span>
+    <span>{{formatCurrency(receipt?.transferAmount ?? 0)}}</span>
+  </div>
+}
+@if (receipt?.cheques?.length > 0) {
+  <div class="payment-div">
+    <span>Cheques:</span>
+    <span>{{formatCurrency(totalCheques)}}</span>
+  </div>
+  <table>
+    <tr>
+      <th>Fecha Diferida</th>
+      <th>Cheque Nº</th>
+      <th>Banco</th>
+      <th>Sucursal</th>
+      <th>CUIT</th>
+      <th>Importe</th>
+    </tr>
+    @for (cheque of receipt.cheques; track $index) {
+      <tr>
+        <td>{{formatDate(cheque.date)}}</td>
+        <td>{{cheque.number}}</td>
+        <td>{{cheque.bank}}</td>
+        <td>{{cheque.branchOffice}}</td>
+        <td>{{formatCuit(cheque.cuit)}}</td>
+        <td class="cell-right">{{formatCurrency(cheque.amount)}}</td>
+      </tr>
+    }
+  </table>
+}
 
 <div class="payment-div total">
   <span>Total:</span>

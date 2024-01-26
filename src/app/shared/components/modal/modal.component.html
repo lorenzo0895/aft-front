@@ -2,37 +2,36 @@
   mat-dialog-title
   cdkDrag
   cdkDragRootElement=".cdk-overlay-pane"
+  cdkDragBoundary="body"
   cdkDragHandle
 >
   {{data.title}}
 </h3>
 <mat-dialog-content>
-  <p
-    *ngIf="data.type === 'confirmation' && data.bodyText"
-    [innerHTML]="data.bodyText"
-  ></p>
-  <form *ngIf="data.type !== 'confirmation' && fields.length !== 0">
-    <br />
-    <formly-form
+  @if (data.type === 'confirmation' && data.bodyText) {
+    <p [innerHTML]="data.bodyText"></p>
+  }
+  @if (data.type !== 'confirmation' && fields.length) {
+    <app-formly
       [model]="model"
       [fields]="fields"
       [options]="options"
       [form]="form"
-    ></formly-form>
-    <br />
-  </form>
+    ></app-formly>
+  }
   <ng-template #target></ng-template>
 </mat-dialog-content>
 
 <mat-dialog-actions [align]="'end'">
-  <button
-    *ngIf="data.showCancelButton"
-    mat-raised-button
-    color="warn"
-    [mat-dialog-close]="undefined"
-  >
-    {{ data.cancelText }}
-  </button>
+  @if (data.showCancelButton) {
+    <button
+      mat-raised-button
+      color="warn"
+      [mat-dialog-close]="undefined"
+    >
+      {{ data.cancelText }}
+    </button>
+  }
   <button
     mat-raised-button
     color="primary"

@@ -1,5 +1,10 @@
 @use 'src/assets/scss/variables.scss' as *;
 
+:host {
+  display: inline-block;
+  height: 100%;
+}
+
 nav {
   background-color: #6a58ba;
   overflow: hidden;

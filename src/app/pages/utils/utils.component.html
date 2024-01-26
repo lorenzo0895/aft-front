@@ -1,11 +1,11 @@
 <h1 class="mat-h1">
-  @if (showingOthers) {
-    <span class="pi pi-angle-left cursor-pointer" (click)="showingOthers = false"></span>
+  @if (showingOthers()) {
+    <span class="pi pi-angle-left cursor-pointer" (click)="!showingOthers()"></span>
   }
   Útiles
 </h1>
 
-@if (showingOthers) {
+@if (showingOthers()) {
   <app-others></app-others>
 } @else {
   <div class="card-container">

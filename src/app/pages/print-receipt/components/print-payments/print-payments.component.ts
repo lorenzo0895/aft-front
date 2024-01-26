@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
 import { cuitFormatter } from '@shared/formatters/cuitFormatter';
 import { currencyFormatter } from '@shared/formatters/currencyFormatter';
@@ -9,7 +8,7 @@ import { dateFormatter } from '@shared/formatters/dateFormatter';
   templateUrl: './print-payments.component.html',
   styleUrls: ['./print-payments.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 export class PrintPaymentsComponent implements OnChanges {
   @Input() receipt?: any;

@@ -1,1 +1,35 @@
-<input type="file" multiple="true" [formControl]="formControl">
+<div 
+  appDragDrop
+  class="drop-container"
+  (drop)="dropped($event.dataTransfer?.files)"
+>
+  @if (!(formControl.value?.length ?? 0)) {
+    <p>{{props.label}}</p>
+    <p-button
+      label="Examinar"
+      icon="pi pi-upload"
+      [size]="'small'"
+      (onClick)="fileinput.click();"
+    ></p-button>
+  } @else {
+    @for (file of formControl.value; track $index;) {
+      <div class="file-wrapper">
+        <div class="image-container">
+          <span class="pi pi-times" (click)="deleteFile($index)"></span>
+          <img [src]="getImage(file)" />
+        </div>
+        <p class="file-name">{{file.name}}</p>
+      </div>
+    }
+  }
+  <input
+    #fileinput
+    id="file-input"
+    type="file"
+    [formControl]="$any(formControl)"
+    [formlyAttributes]="field"
+    [multiple]="this.props['multiple'] ?? false"
+    [accept]="accept"
+    style="display: none;"
+  />
+</div>

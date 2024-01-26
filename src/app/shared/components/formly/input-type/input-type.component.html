@@ -1,38 +1,44 @@
-<input
-  *ngIf="props.type === 'text'"
-  pInputText
-  [placeholder]="props.placeholder ?? ''"
-  [formlyAttributes]="field"
-  [formControl]="formControl"
-  [pKeyFilter]="props.filter"
-/>
-<p-password
-  *ngIf="props.type === 'password'"
-  [toggleMask]="props.toggleMask"
-  [feedback]="props.feedback"
-  [placeholder]="props.placeholder ?? ''"
-  [formlyAttributes]="field"
-  [formControl]="formControl"
-  [pKeyFilter]="props.filter"
-></p-password>
-<p-inputNumber
-  #inputNumber
-  *ngIf="['number','currency','percentage'].includes(props.type)"
-  [placeholder]="props.placeholder ?? ''"
-  [formlyAttributes]="field"
-  [formControl]="formControl"
-  [mode]="mode"
-  [minFractionDigits]="2"
-  [maxFractionDigits]="2"
-  [suffix]="props.type === 'percentage' ? '%' : ''"
-  [currency]="props.attributes.currency"
-  [locale]="props.attributes.locale"
-  [class.text-right]="props.type === 'currency' || props.type === 'percentage'"
-  (onInput)="onInput($event)"
-></p-inputNumber>
-<p-inputMask
-  *ngIf="props.type === 'mask'"
-  [mask]="props.attributes.mask"
-  [formlyAttributes]="field"
-  [formControl]="formControl"
-></p-inputMask>
+@switch (props.type) {
+  @case ('text') {
+    <input
+      pInputText
+      [placeholder]="props.placeholder ?? ''"
+      [formlyAttributes]="field"
+      [formControl]="formControl"
+      [pKeyFilter]="props.filter"
+    />
+  }
+  @case ('password') {
+    <p-password
+      [toggleMask]="props.toggleMask"
+      [feedback]="props.feedback"
+      [placeholder]="props.placeholder ?? ''"
+      [formlyAttributes]="field"
+      [formControl]="formControl"
+      [pKeyFilter]="props.filter"
+    ></p-password>
+  }
+  @case ('mask') {
+    <p-inputMask
+      [mask]="props.attributes.mask"
+      [formlyAttributes]="field"
+      [formControl]="formControl"
+    ></p-inputMask>
+  }
+  @default {
+    <p-inputNumber
+      #inputNumber
+      [placeholder]="props.placeholder ?? ''"
+      [formlyAttributes]="field"
+      [formControl]="formControl"
+      [mode]="mode"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [suffix]="props.type === 'percentage' ? '%' : ''"
+      [currency]="props.attributes.currency"
+      [locale]="props.attributes.locale"
+      [class.text-right]="props.type === 'currency' || props.type === 'percentage'"
+      (onInput)="onInput($event)"
+    ></p-inputNumber>
+  }
+}

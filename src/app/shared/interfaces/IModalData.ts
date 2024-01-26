@@ -12,11 +12,11 @@ export interface IModalData {
   /**
    * Modal type. `new`, `edit` or `confirmation`.
    */
-  type: 'new' | 'edit' | 'confirmation';
+  type?: 'new' | 'edit' | 'confirmation' | 'custom';
   /**
    * The text that will be displayed as modal title.
    */
-  title: string;
+  title?: string;
   /**
    * The text that will be displayed in case of confirmation type modal.
    */

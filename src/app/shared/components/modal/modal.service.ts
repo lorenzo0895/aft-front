@@ -26,7 +26,7 @@ export class ModalService {
    * To avoid this behaviour, set `closeAfterSubmit` to false in
    * modalData.
    */
-  open(modalData?: MatDialogConfig<IModalData>): MatDialogRef<ModalComponent> {
+  open(modalData: MatDialogConfig<IModalData>): MatDialogRef<ModalComponent> {
     const finalConfig = this.setDefaultConfigs(modalData);
     const dialogRef = this._dialog.open(ModalComponent, finalConfig);
     if (finalConfig.data?.closeAfterSubmit) {
@@ -36,29 +36,22 @@ export class ModalService {
   }
 
   private setDefaultConfigs(
-    config?: MatDialogConfig<IModalData>
+    config: MatDialogConfig<IModalData>
   ): MatDialogConfig<IModalData> {
-    return {
-      width: config?.width ?? '600px',
-      height: config?.height,
-      maxHeight: config?.maxHeight,
-      maxWidth: config?.maxWidth,
-      autoFocus: 'dialog',
-      scrollStrategy: this._sso.noop(),
-      data: {
-        ...config?.data,
-        showCancelButton: config?.data?.showCancelButton ?? true,
-        formlyData: {
-          fields: config?.data?.formlyData?.fields,
-          model: { ...config?.data?.formlyData?.model },
-          options: { ...config?.data?.formlyData?.options },
-        },
-        title: config?.data?.title ?? 'Título',
-        type: config?.data?.type ?? 'confirmation',
-        confirmText: config?.data?.confirmText ?? 'Confirmar',
-        cancelText: config?.data?.cancelText ?? 'Cancelar',
-        closeAfterSubmit: config?.data?.closeAfterSubmit ?? true,
-      },
-    };
+    config.width ??= '600px';
+    config.autoFocus ??= 'dialog';
+    config.scrollStrategy ??= this._sso.noop();
+    config.data ??= {};
+    config.data.title ??= 'Título';
+    config.data.type ??= 'confirmation';
+    config.data.confirmText ??= 'Confirmar';
+    config.data.cancelText ??= 'Cancelar';
+    config.data.closeAfterSubmit ??= true;
+    config.data.showCancelButton ??= true;
+    config.data.formlyData ??= {};
+    config.data.formlyData.fields ??= [];
+    config.data.formlyData.model ??= {};
+    config.data.formlyData.options ??= {};
+    return config;
   }
 }

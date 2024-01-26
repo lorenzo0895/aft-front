@@ -4,7 +4,6 @@ import { ValueGetterParams } from 'ag-grid-community';
 import { ReceiptsComponent } from '../receipts.component';
 import { dateFormatter } from 'src/app/shared/formatters/dateFormatter';
 import { currencyFormatter } from 'src/app/shared/formatters/currencyFormatter';
-import { CustomTextComponent } from 'src/app/shared/components/ag-grid/custom-text/custom-text.component';
 import { ChipCellComponent } from '@shared/components/ag-grid/chip-cell/chip-cell.component';
 
 export const colDefs = (parentComponent: ReceiptsComponent): ColDef[] => [
@@ -174,17 +173,17 @@ export const colDefs = (parentComponent: ReceiptsComponent): ColDef[] => [
     valueGetter: (params: ValueGetterParams) => {
       const array: string[] = [];
       if (params.data.isActive) {
-        if (parentComponent.authService.hasRole('editReceipt')) {
+        if (parentComponent.authService.hasRoleSignal('editReceipt')()) {
           array.push('edit');
         } else {
           array.push('view');
         }
-        if (parentComponent.authService.hasRole('closeReceipt'))
+        if (parentComponent.authService.hasRoleSignal('closeReceipt')())
           array.push('close');
       } else {
         array.push('view')
         if (
-          parentComponent.authService.hasRole('reopenReceipt') &&
+          parentComponent.authService.hasRoleSignal('reopenReceipt')() &&
           !params.data.isCancelled
         )
           array.push('open');

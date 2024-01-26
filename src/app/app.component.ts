@@ -1,33 +1,39 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { fadeAnimation } from '@shared/constants/fadeIn.animation';
+import { ChangeDetectorRef, Component, effect, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@shared/services/auth.service';
 import { LoadingService } from '@shared/services/loading.service';
-import { Observable } from 'rxjs';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
+import { SidebarComponent } from '@shared/components/sidebar/sidebar.component';
+import { fadeAnimation } from '@shared/constants/fadeIn.animation';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    NavbarComponent,
+    SidebarComponent,
+    MatProgressBarModule,
+    ToastModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   animations: [fadeAnimation],
 })
-export class AppComponent implements OnInit {
-  title = 'my-app-front';
-  isOpen: boolean = false;
-  isLogged$!: Observable<boolean>;
-  isLoading: boolean = false;
-  state: 'void' | '*' = 'void';
+export class AppComponent {
+  isOpen = signal<boolean>(localStorage.getItem('isOpen') === 'true');
 
   constructor(
-    private _authService: AuthService,
+    protected _authService: AuthService,
     protected _loadingService: LoadingService,
-    private _cd: ChangeDetectorRef,
   ) {}
 
-  ngOnInit() {
-    this.isLogged$ = this._authService.isLogged$;
-    this._loadingService.isLoading$.subscribe((res) => {
-      this.isLoading = res;
-      this._cd.detectChanges();
-    });
+  openCloseSidebar() {
+    this.isOpen.update((x) => !x);
+    localStorage.setItem('isOpen', JSON.stringify(this.isOpen));
   }
 }

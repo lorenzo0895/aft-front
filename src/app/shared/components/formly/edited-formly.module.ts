@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormlyFieldSelect } from '@shared/components/formly/select-type/select-type.component';
 import { CalendarTypeComponent } from '@shared/components/formly/calendar-type/calendar-type.component';
-import { FormlyFieldCheckbox } from '@ngx-formly/primeng/checkbox';
-import { FormlyFieldRadio } from '@ngx-formly/primeng/radio';
+// import { FormlyFieldRadio } from '@ngx-formly/primeng/radio';
 import { CalendarTypeModule } from '@shared/components/formly/calendar-type/calendar-type.module';
 import { SelectTypeModule } from '@shared/components/formly/select-type/select-type.module';
 import { FormlyWrapperFormFieldModule } from '@shared/components/formly/wrappers/form-field.module';
@@ -34,7 +33,9 @@ import { FileTypeComponent } from './file-type/file-type.component';
 import { FileTypeModule } from './file-type/file-type.module';
 import { RepeatTypeComponent } from './repeat-type/repeat-type.component';
 import { RepeatTypeModule } from './repeat-type/repeat-type.module';
-import { FloatWrapperComponent } from './wrappers/float-wrapper/float-wrapper.component';
+import { EditedFormlyComponent } from './formly.component';
+import { FormlyCheckboxModule, FormlyFieldCheckbox } from '@ngx-formly/primeng/checkbox';
+import { FormlyFieldRadio, FormlyRadioModule } from '@ngx-formly/primeng/radio';
 
 export const match = (
   a: AbstractControl,
@@ -46,6 +47,9 @@ export const match = (
 };
 
 @NgModule({
+  declarations: [
+    EditedFormlyComponent,
+  ],
   imports: [
     CommonModule,
     CalendarTypeModule,
@@ -60,6 +64,8 @@ export const match = (
     FileTypeModule,
     AutocompleteTypeModule,
     RepeatTypeModule,
+    FormlyCheckboxModule,
+    FormlyRadioModule,
     FormlyModule.forRoot({
       validators: [{ name: 'match', validation: match }],
       validationMessages: [
@@ -70,54 +76,25 @@ export const match = (
         { name: 'max', message: maxValidationMessage },
         { name: 'match', message: 'Los campos no coinciden' },
       ],
-      wrappers: [
-        { name: 'form-field', component: FormlyWrapperFormField },
-        { name: 'float-wrapper', component: FloatWrapperComponent },
-      ],
       types: [
-        {
-          name: 'input',
-          component: InputTypeComponent,
-          wrappers: ['form-field'],
-        },
-        {
-          name: 'repeat',
-          component: RepeatTypeComponent,
-          wrappers: [],
-        },
-        {
-          name: 'select',
-          component: FormlyFieldSelect,
-          wrappers: ['form-field'],
-        },
-        {
-          name: 'calendar',
-          component: CalendarTypeComponent,
-          wrappers: ['form-field'],
-        },
-        {
-          name: 'autocomplete',
-          component: AutocompleteTypeComponent,
-          wrappers: ['form-field'],
-        },
-        {
-          name: 'file',
-          component: FileTypeComponent,
-          wrappers: [],
-        },
-        {
-          name: 'dropdown',
-          component: DropdownTypeComponent,
-          wrappers: [],
-        },
-        { name: 'checkbox', component: FormlyFieldCheckbox, wrappers: [] },
-        { name: 'radio', component: FormlyFieldRadio, wrappers: [] },
-        { name: 'switch', component: SwitchTypeComponent, wrappers: [] },
-        { name: 'html', component: HtmlTypeComponent, wrappers: [] },
-        { name: 'button', component: ButtonTypeComponent, wrappers: [] },
-        { name: 'icon', component: IconTypeComponent, wrappers: [] },
+        { name: 'autocomplete', component: AutocompleteTypeComponent, defaultOptions: { wrappers: [FormlyWrapperFormField] } },
+        { name: 'calendar', component: CalendarTypeComponent, defaultOptions: { wrappers: [FormlyWrapperFormField] } },
+        { name: 'input', component: InputTypeComponent, defaultOptions: { wrappers: [FormlyWrapperFormField] } },
+        { name: 'select', component: FormlyFieldSelect, defaultOptions: { wrappers: [FormlyWrapperFormField] } },
+        { name: 'dropdown', component: DropdownTypeComponent },
+        { name: 'checkbox', component: FormlyFieldCheckbox },
+        { name: 'repeat', component: RepeatTypeComponent },
+        { name: 'switch', component: SwitchTypeComponent },
+        { name: 'button', component: ButtonTypeComponent },
+        { name: 'file', component: FileTypeComponent },
+        { name: 'radio', component: FormlyFieldRadio },
+        { name: 'html', component: HtmlTypeComponent },
+        { name: 'icon', component: IconTypeComponent },
       ],
     }),
   ],
+  exports: [
+    EditedFormlyComponent,
+  ]
 })
 export class EditedFormlyModule {}

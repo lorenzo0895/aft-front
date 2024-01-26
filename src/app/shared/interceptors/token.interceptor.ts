@@ -6,12 +6,11 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '@shared/services/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private _authService: AuthService) {}
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token: string | null = localStorage.getItem('token');
@@ -22,7 +21,6 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       });
     }
-    this._authService.updateObservables();
     return next.handle(request);
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
@@ -15,7 +14,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, ButtonModule, AgGridModule],
+  imports: [ButtonModule, AgGridModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })

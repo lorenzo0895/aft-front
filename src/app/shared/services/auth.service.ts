@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { tap, BehaviorSubject, finalize } from 'rxjs';
+import { Injectable, computed, effect, signal } from '@angular/core';
+import { tap, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import { SpinnerService } from '@shared/components/spinner/services/spinner.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private _url: string = environment.apiUrl + '/auth';
-  roles$ = new BehaviorSubject([] as string[]);
-  isLogged$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  roles$ = signal<string[]>([]);
+  isLogged = signal<boolean>(true);
   user$: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
@@ -20,11 +19,9 @@ export class AuthService {
     private _http: HttpClient,
     private _jwt: JwtHelperService,
   ) {
-    this.roles$.next(this._getRoles());
-    this.isLogged$.next(this._isLogged());
-    this.user$.next(this._getUser());
-    this.isLogged$.subscribe((isLogged) => {
-      if (!isLogged) this._router.navigate(['login']);
+    this.updateObservables();
+    effect(() => {
+      if (!this.isLogged()) this._router.navigate(['login']);
     });
   }
 
@@ -37,33 +34,37 @@ export class AuthService {
       .pipe(
         tap((res: any) => {
           localStorage.setItem('token', res.token);
-          this.roles$.next(this._getRoles());
-          this.isLogged$.next(true);
-          this.user$.next(this._getUser());
+          this.updateObservables();
         }),
       );
   }
 
   logout() {
     localStorage.removeItem('token');
-    this.isLogged$.next(false);
-    this.roles$.next([]);
-    this._router.navigate(['login']);
+    this.updateObservables()
   }
 
   updateObservables() {
     this.user$.next(this._getUser());
-    this.roles$.next(this._getRoles());
-    this.isLogged$.next(this._isLogged());
+    this.roles$.set(this._getRoles());
+    this.isLogged.set(this._isLogged());
   }
 
   hasRole(role: string) {
-    return this.roles$.value.includes(role);
+    return this.roles$().includes(role);
+  }
+
+  hasRoleSignal(role: string) {
+    return computed(() => this.roles$().includes(role));
   }
 
   private _getParsedToken() {
-    const token = <string>this._jwt.tokenGetter();
-    return token ? this._jwt.decodeToken(token) : null;
+    try {
+      const token = <string>this._jwt.tokenGetter();
+      return token ? this._jwt.decodeToken(token) : null;
+    } catch (error) {
+      return null;
+    }
   }
 
   private _getRoles() {
@@ -71,13 +72,21 @@ export class AuthService {
   }
 
   private _getUser() {
-    const parsedToken = this._getParsedToken();
-    return parsedToken;
+    try {
+      const parsedToken = this._getParsedToken();
+      return parsedToken;
+    } catch (error) {
+      return null;
+    }
   }
 
   private _isLogged() {
-    const token = <string>this._jwt.tokenGetter();
-    const expired = this._jwt.isTokenExpired(token);
-    return token != null && !expired;
+    try {
+      const token = <string>this._jwt.tokenGetter();
+      const expired = this._jwt.isTokenExpired(token);
+      return !!token && !expired;
+    } catch (error) {
+      return false;
+    }
   }
 }

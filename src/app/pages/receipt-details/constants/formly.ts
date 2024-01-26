@@ -223,7 +223,7 @@ export const conceptItemfields = (concepts: any[], model: any): FormlyFieldConfi
             },
             expressions: {
               hide: (field) => {
-                if (model?.concept) return true;
+                if (!field.model?.concept) return true;
                 const concept = concepts.find(it => it.id === field.model.concept);
                 if (!concept) return true;
                 return !concept.isOwnFee;

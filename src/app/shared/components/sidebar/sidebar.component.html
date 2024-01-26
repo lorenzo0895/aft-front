@@ -1,12 +1,23 @@
 <nav [class.open]="open">
   <ul>
-    <li *ngFor="let item of items">
-      <div class="li-div" [routerLink]="item.route" routerLinkActive="selected">
-        <div class="icon-div">
-          <mat-icon [fontIcon]="item.icon"></mat-icon>
+    @for (item of items; track $index) {
+      <li>
+        <div class="li-div"
+          #element
+          tabIndex="0"
+          (keydown.enter)="redirect(item.route)"
+          (keydown.arrowDown)="onFocus($event, $index + 1)"
+          (keydown.arrowUp)="onFocus($event, $index - 1)"
+          (click)="redirect(item.route)"
+          [routerLink]="item.route"
+          routerLinkActive="selected"
+        >
+          <div class="icon-div">
+            <mat-icon [fontIcon]="item.icon"></mat-icon>
+          </div>
+          <span>{{item.label}}</span>
         </div>
-        <span>{{item.label}}</span>
-      </div>
-    </li>
+      </li>
+    }
   </ul>
 </nav>

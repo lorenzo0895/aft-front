@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ModalService } from '@shared/components/modal/modal.service';
-import { liqPrimGranosModalData, minutaModalData, xubioModalData } from './constants/modals';
+import { minutaModalData, exportSalesModalData } from './constants/modals';
 import { ReceiptsService } from '@shared/services/receipts.service';
 import { ExcelService } from '@shared/services/excel.service';
 import { ConceptsService } from '@shared/services/concepts.service';
 import { ClientsService } from '@shared/services/clients.service';
-import { UtilsService } from '@shared/services/utils.service';
 import { OthersComponent } from './components/others/others.component';
 
 @Component({
@@ -19,13 +18,13 @@ import { OthersComponent } from './components/others/others.component';
 export class UtilsComponent {
   concepts: any[] = [];
   clients: any[] = [];
-  showingOthers = false;
+  showingOthers = signal<boolean>(false);
   cards: any[] = [
     { 
       header: 'Exportar Facturación',
       subheader: 'Exporta un excel con el resumen facturado en un rango de fechas',
       subtitle: 'Genera reportes de Honorarios cobrados por el estudio dentro de un rango de fechas específico con formato legible.',
-      onClick: this.xubio.bind(this),
+      onClick: this.exportSales.bind(this),
       img: 'assets/img/card2.png',
     },
     { 
@@ -68,31 +67,21 @@ export class UtilsComponent {
     });
   }
 
-  xubio() {
-    const dialogRef = this._modalService.open(xubioModalData(this));
+  exportSales() {
+    const dialogRef = this._modalService.open(exportSalesModalData(this));
     dialogRef.componentInstance.onSubmit.subscribe((model) => {
       this._receiptsService
-      .xubio({ start: model.start, end: model.end })
-      .subscribe((res: any[]) => {
-          this._excelervice
-            .xubio(res, model, 'Reporte Xubio.xls')
-            .subscribe();
-        });
+        .exportSales({ start: model.start, end: model.end })
+        .subscribe((res: any[]) => {
+            this._excelervice
+              .exportSales(res, model, 'Facturacion.xls')
+              .subscribe();
+          });
     });
   }
 
   others() {
-    this.showingOthers = !this.showingOthers;
+    this.showingOthers.update(x => !x);
   }
 
-  // liqPrimGranos() {
-  //   const dialogRef = this._modalService.open(liqPrimGranosModalData(this));
-  //   dialogRef.componentInstance.onSubmit.subscribe(res => {
-  //     console.log(res);
-  //     this._utilsService.liqPrimGranos(res.files).subscribe(res => {
-  //       console.log(res);
-  //       dialogRef.close();
-  //     })
-  //   })
-  // }
 }

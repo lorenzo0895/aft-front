@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingService {
-  private behSub$ = new BehaviorSubject<boolean>(false);
-  isLoading$ = this.behSub$.asObservable();
+  isLoading = signal<boolean>(false)
 
-  constructor() {}
+  constructor(private ngZone: NgZone) {}
 
   set(isLoading: boolean) {
-    this.behSub$.next(isLoading);
+    this.isLoading.set(isLoading);
   }
 }

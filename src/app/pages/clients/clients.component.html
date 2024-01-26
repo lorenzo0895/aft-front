@@ -1,14 +1,15 @@
 <div class="space-between">
   <h1 class="mat-h1">Clientes</h1>
   <div class="right-div">
-    <formly-form [fields]="fields" [model]="model" (modelChange)="rowData = _rawRowData"></formly-form>
-    <p-button
-      *ngIf="authService.hasRole('createClient')"
-      label="Añadir"
-      icon="pi pi-plus"
-      styleClass="p-button-sm"
-      (click)="onCreate()"
-    ></p-button>
+    <app-formly [fields]="fields" [model]="model" (modelChange)="rowData = _rawRowData"></app-formly>
+    @if (authService.hasRoleSignal('createClient')()) {
+      <p-button
+        label="Añadir"
+        icon="pi pi-plus"
+        [size]="'small'"
+        (click)="onCreate()"
+      ></p-button>
+    }
   </div>
 </div>
 

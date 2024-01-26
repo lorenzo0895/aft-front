@@ -136,13 +136,13 @@ export const colDefs = (parentComponent: DatesComponent, isMobile = false): ColD
     valueGetter: (params: ValueGetterParams) => {
       const array: string[] = [];
       if (
-        parentComponent.authService.hasRole('reopenDay') &&
+        parentComponent.authService.hasRoleSignal('reopenDay')() &&
         !params.data.isActive
       ) {
         array.push('open');
       }
       if (
-        parentComponent.authService.hasRole('closeDay') &&
+        parentComponent.authService.hasRoleSignal('closeDay')() &&
         params.data.isActive
       ) {
         array.push('close');

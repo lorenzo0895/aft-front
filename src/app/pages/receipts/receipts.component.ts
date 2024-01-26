@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { ReceiptsService } from 'src/app/shared/services/receipts.service';
 import { ModalService } from 'src/app/shared/components/modal/modal.service';
@@ -13,20 +12,22 @@ import {
   searchModalData,
 } from './constants/modals';
 import { ButtonModule } from 'primeng/button';
-import { FormlyModule } from '@ngx-formly/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ChequesService } from '@shared/services/cheques.service';
 import { AuthService } from '@shared/services/auth.service';
 import { ClientsService } from '@shared/services/clients.service';
 import { ChipModule } from 'primeng/chip';
-import * as moment from 'moment';
+import moment from 'moment';
 import { DaysService } from '@shared/services/days.service';
+import { EditedFormlyModule } from '@shared/components/formly/edited-formly.module';
+import { UxService } from '@shared/services/ux.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-receipts',
   standalone: true,
-  imports: [CommonModule, AgGridModule, ButtonModule, FormlyModule, ChipModule],
+  imports: [CommonModule, AgGridModule, ButtonModule, EditedFormlyModule, ChipModule],
   templateUrl: './receipts.component.html',
   styleUrls: ['./receipts.component.scss'],
 })
@@ -43,14 +44,15 @@ export class ReceiptsComponent implements OnInit {
   };
 
   constructor(
-    private _router: Router,
     public authService: AuthService,
+    protected _uxService: UxService,
+    private _router: Router,
     private _modalService: ModalService,
     private _chequesService: ChequesService,
     private _activatedRoute: ActivatedRoute,
     private _receiptsService: ReceiptsService,
     private _clientsService: ClientsService,
-    private _daysService: DaysService
+    private _daysService: DaysService,
   ) {}
 
   ngOnInit(): void {

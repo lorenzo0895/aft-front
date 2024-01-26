@@ -100,13 +100,13 @@ export const colDefs = (parentComponent: ReceiptsItemsComponent): ColDef[] => [
     valueGetter: (params: ValueGetterParams) => {
       const array: string[] = [];
       if (
-        parentComponent.authService.hasRole('closeConcept') &&
+        parentComponent.authService.hasRoleSignal('closeConcept')() &&
         params.data.isActive
       ) {
         array.push('close');
       }
       if (
-        parentComponent.authService.hasRole('reopenConcept') &&
+        parentComponent.authService.hasRoleSignal('reopenConcept')() &&
         !params.data.isActive
       ) {
         array.push('reopen');

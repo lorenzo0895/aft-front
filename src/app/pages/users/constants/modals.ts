@@ -308,6 +308,38 @@ const fields = (row: any): FormlyFieldConfig[] => [
       },
     ],
   },
+  {
+    type: 'html',
+    className: 'html-type',
+    props: {
+      innerHTML: '<h3>Facturación</h3>',
+    },
+  },
+  {
+    fieldGroupClassName: 'display-flex switch-flex',
+    fieldGroup: [
+      {
+        key: 'roles.getBilling',
+        type: 'switch',
+        className: 'flex-1',
+        props: {
+          label: 'Ver facturación',
+        },
+      },
+      {
+        key: 'roles.postBilling',
+        type: 'switch',
+        className: 'flex-1',
+        props: {
+          label: 'Editar facturación',
+        },
+      },
+      {
+        className: 'flex-1',
+        type: 'html',
+      },
+    ],
+  },
 ];
 
 export const passwordFields: FormlyFieldConfig[] = [

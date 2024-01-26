@@ -246,6 +246,7 @@ export const defaultGridOptions: GridOptions = {
   pagination: true,
   suppressHorizontalScroll: true,
   paginationPageSize: 10,
+  paginationPageSizeSelector: [10, 20, 50, 100],
   rowHeight: 28,
   headerHeight: 42,
   rowSelection: 'single',

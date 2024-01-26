@@ -1,29 +1,30 @@
 <div class="space-between">
   <h1 class="mat-h1">Comprobantes de Caja</h1>
   <div class="buttons-div">
-    <p-chip
-      *ngIf="filterModel.date"
-      label="{{filterModel.date[0].format('DD/MM/YY')}} al {{filterModel.date[1].format('DD/MM/YY')}}"
-      [removable]="true"
-      (onRemove)="onRemove('date')"
-    ></p-chip>
-    <p-chip
-      *ngIf="filterModel.client"
-      label="{{filterModel.client.label}}"
-      [removable]="true"
-      (onRemove)="onRemove('client')"
-    ></p-chip>
-
+    @if (filterModel.date) {
+      <p-chip
+        [label]="filterModel.date[0].format('DD/MM/YY') + ' al ' + filterModel.date[1].format('DD/MM/YY')"
+        [removable]="true"
+        (onRemove)="onRemove('date')"
+      ></p-chip>
+    }
+    @if (filterModel.client) {
+      <p-chip
+        [label]="filterModel.client.label"
+        [removable]="true"
+        (onRemove)="onRemove('client')"
+      ></p-chip>
+    }
     <p-button
-      label="Buscar"
+      [label]="!(_uxService.isMobile$ | async) ? 'Buscar' : ''"
       icon="pi pi-search"
-      styleClass="p-button-sm"
+      [size]="'small'"
       (click)="onOpenSearchModal()"
     ></p-button>
     <p-button
-      label="Añadir"
+      [label]="!(_uxService.isMobile$ | async) ? 'Añadir' : ''"
       icon="pi pi-plus"
-      styleClass="p-button-sm"
+      [size]="'small'"
       (click)="onCreate()"
     ></p-button>
   </div>

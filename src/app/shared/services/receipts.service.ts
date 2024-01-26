@@ -28,7 +28,7 @@ export class ReceiptsService extends BaseHttpService {
     );
   }
 
-  xubio(query: any): Observable<any[]> {
+  exportSales(query: any): Observable<any[]> {
     return this._http.get<any[]>(
       `${this._url}/report/xubio?start=${query.start}&end=${query.end}`
     );

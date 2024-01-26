@@ -25,20 +25,20 @@ export interface FormlyFieldProps extends CoreFormlyFieldProps {
       <span class="p-float-label" #pFloatLabel>
         <label [for]="id">
           {{ props.label }}
-          <span
-            *ngIf="props.required && props.hideRequiredMarker !== true"
-            aria-hidden="true"
-            >*</span
-          >
+          @if (props.required && props.hideRequiredMarker !== true) {
+            <span aria-hidden="true">*</span>
+          }
         </label>
         <ng-container #fieldComponent></ng-container>
       </span>
-      <small *ngIf="showError" class="p-error">
-        <formly-validation-message
-          class="ui-message-text"
-          [field]="field"
-        ></formly-validation-message>
-      </small>
+      @if (showError) {
+        <small class="p-error">
+          <formly-validation-message
+            class="ui-message-text"
+            [field]="field"
+          ></formly-validation-message>
+        </small>
+      }
     </div>
   `,
   styleUrls: ['./formly-field.scss'],

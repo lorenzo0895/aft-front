@@ -1,10 +1,8 @@
 <nav>
   <div>
-    <mat-icon
-      *ngIf="isLogged$ | async"
-      fontIcon="menu"
-      (click)="onMenuClick()"
-    ></mat-icon>
+    @if (isLogged()) {
+      <mat-icon fontIcon="menu" tabindex="0" (keydown.enter)="onMenuClick()" (click)="onMenuClick()"></mat-icon>
+    }
     <img src="assets/img/logo-black.png">
     @if (_uxService.isMobile$ | async) {
       <span>Spallione</span>
@@ -12,15 +10,19 @@
       <span>Estudio Impositivo Spallione</span>
     }
   </div>
-  <div class="user-info" *ngIf="isLogged$ | async">
-    @if (_uxService.isMobile$ | async) {
-      <div class="user-icon">{{((user$ | async)?.name ?? '') | titlecase | slice : 0 : 1}}</div>
-    } @else {
-      <span>{{(user$ | async)?.name + ' ' + (user$ | async)?.surname}}</span>
-    }
-    <mat-icon
-      fontIcon="logout"
-      (click)="logout()"
-    ></mat-icon>
-  </div>
+  @if (isLogged()) {
+    <div class="user-info">
+      @if (_uxService.isMobile$ | async) {
+        <div class="user-icon">{{((user$ | async)?.name ?? '') | titlecase | slice : 0 : 1}}</div>
+      } @else {
+        <span>{{(user$ | async)?.name + ' ' + (user$ | async)?.surname}}</span>
+      }
+      <mat-icon
+        tabindex="0"
+        fontIcon="logout"
+        (keydown.enter)="logout()"
+        (click)="logout()"
+      ></mat-icon>
+    </div>
+  }
 </nav>

@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { IActionCellEvents } from './ICoaAgGrid';
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'action-cell',

@@ -64,7 +64,7 @@ export const minutaFields = (
   },
 ];
 
-export const xubioFields = (parent: UtilsComponent): FormlyFieldConfig[] => [
+export const exportSalesFields = (parent: UtilsComponent): FormlyFieldConfig[] => [
   {
     fieldGroup: [
       {
@@ -106,13 +106,21 @@ export const xubioFields = (parent: UtilsComponent): FormlyFieldConfig[] => [
         fieldGroupClassName: 'display-flex',
         fieldGroup: [
           {
+            key: 'salePoint',
             type: 'input',
-            defaultValue: 'A-0005',
+            defaultValue: 'A-0006',
             className: 'flex-1',
             props: {
               label: 'Punto de venta',
-              disabled: true,
             },
+            validators: {
+              validFormat: {
+                expression: (c: AbstractControl) => {
+                  return /^[ABCE]-([0-9]{4}|[0-9]{6})$/.test(c.value);
+                },
+                message: () => `Debe tener formato X-0000 o X-000000`,
+              },
+            }
           },
           {
             key: 'firstNumber',

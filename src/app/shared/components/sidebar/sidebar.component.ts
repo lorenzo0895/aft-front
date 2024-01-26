@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,14 +10,11 @@ import { Router, RouterModule } from '@angular/router';
   imports: [CommonModule, MatIconModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  host: {
-    '[style.display]': '"inline-block"',
-    '[style.height]': '"100%"',
-  },
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
+  @ViewChildren('element') elements!: QueryList<ElementRef<HTMLDivElement>>;
   @Input() open: boolean = true;
-  @Input() items: any[] = [
+  private _items: any[] = [
     { icon: 'group', label: 'Clientes', route: 'clients' },
     { icon: 'calendar_month', label: 'Fechas', route: 'dates' },
     { icon: 'receipt_long', label: 'Comprobantes de Caja', route: 'receipts' },
@@ -24,9 +22,30 @@ export class SidebarComponent implements OnInit {
     { icon: 'article', label: 'Útiles', route: 'utils' },
     // { icon: 'sync_alt', label: 'Otros Movimientos', route: 'other' },
     { icon: 'group', label: 'Usuarios', route: 'users' },
+    { icon: 'account_balance', label: 'Facturación', route: 'billing', role: 'getBilling' },
   ];
-  constructor(private _router: Router) {}
+  items: any[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    protected _authService: AuthService,
+    private _router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.items = this._items.filter(item => {
+      return !item.role || this._authService.hasRole(item.role);
+    })
+  }
+
+  redirect(route: string) {
+    this._router.navigateByUrl(route);
+  }
+
+  onFocus(event: Event, index: number) {
+    event.preventDefault();
+    const a = this.elements.get(index);
+    if (!a) return;
+    a.nativeElement.focus();
+  }
 
 }

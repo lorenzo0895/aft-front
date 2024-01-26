@@ -1,0 +1,52 @@
+<div class="space-between">
+  <h1 class="mat-h1">Facturación</h1>
+  <div class="buttons-div">
+    @if (true) {
+      <p-button
+        [icon]="'pi pi-cog'"
+        [size]="'small'"
+        [disabled]="!this.generalConfigs"
+        (onClick)="onSettings()"
+      ></p-button>
+      <p-button
+        [label]="'Exportar'"
+        [icon]="'pi pi-file-export'"
+        [size]="'small'"
+        [severity]="'success'"
+        [disabled]="!this.rowData().length"
+        (onClick)="onExport()"
+      ></p-button>
+      <p-button
+        label="Generar CAE"
+        [size]="'small'"
+        [severity]="'warning'"
+        [disabled]="!agGrid?.api?.getSelectedRows?.()?.length"
+        (onClick)="onGenerateCAE(agGrid.api.getSelectedRows())"
+      ></p-button>
+      <p-button
+        label="Eliminar"
+        [size]="'small'"
+        [severity]="'danger'"
+        [disabled]="!agGrid?.api?.getSelectedRows?.()?.length"
+        (onClick)="onDelete(agGrid.api.getSelectedRows())"
+      ></p-button>
+      <p-button
+        label="Importar"
+        [size]="'small'"
+        (onClick)="onImport()"
+      ></p-button>
+    }
+  </div>
+</div>
+
+<div class="ag-grid-div">
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="rowData()"
+    [gridOptions]="gridOptions"
+    [isRowSelectable]="isRowSelectable"
+    [style]="'height: 100%; width: 100%'"
+  ></ag-grid-angular>
+</div>

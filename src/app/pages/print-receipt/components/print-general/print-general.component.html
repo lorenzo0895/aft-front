@@ -1,10 +1,12 @@
 <div>
   <p>
     Apellido y nombre/Razón social:
-    <span *ngIf="receipt">
-      {{receipt.client.surname ? receipt.client.surname + ', ' +
-      receipt.client.name : receipt.client.name }}
-    </span>
+    @if (receipt) {
+      <span>
+        {{receipt.client.surname ? receipt.client.surname + ', ' +
+        receipt.client.name : receipt.client.name }}
+      </span>
+    }
   </p>
   <p>
     CUIT: {{ printCuit(receipt?.client?.cuit) }}

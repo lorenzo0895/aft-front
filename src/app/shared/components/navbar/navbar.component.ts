@@ -14,7 +14,7 @@ import { UxService } from '@shared/services/ux.service';
 })
 export class NavbarComponent implements OnInit {
   @Output() menuClick: EventEmitter<void> = new EventEmitter();
-  isLogged$!: Observable<boolean>;
+  isLogged = this._authService.isLogged;
   user$!: Observable<any>;
 
   constructor(
@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isLogged$ = this._authService.isLogged$;
     this.user$ = this._authService.user$;
   }
   onMenuClick() {

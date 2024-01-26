@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ClientsService } from 'src/app/shared/services/clients.service';
 import { ModalService } from 'src/app/shared/components/modal/modal.service';
@@ -10,18 +9,20 @@ import { colDefs } from './constants/agGrid';
 import { defaultGridOptions } from 'src/app/shared/constants/agGrid';
 import { AgGridModule } from 'ag-grid-angular';
 import { AuthService } from '@shared/services/auth.service';
-import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { fields } from './constants/formly';
+import { UxService } from '@shared/services/ux.service';
+import { Subscription } from 'rxjs';
+import { EditedFormlyModule } from '@shared/components/formly/edited-formly.module';
 
 @Component({
   selector: 'app-clients',
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     ButtonModule,
     AgGridModule,
-    FormlyModule,
+    EditedFormlyModule,
   ],
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
@@ -40,17 +41,22 @@ export class ClientsComponent implements OnInit {
   gridOptions: GridOptions = { ...defaultGridOptions };
   fields: FormlyFieldConfig[] = fields;
   model: any = { onlyActive: undefined };
+  subscription?: Subscription;
 
   constructor(
+    public authService: AuthService,
     private _clientsService: ClientsService,
     private _modalService: ModalService,
-    public authService: AuthService
+    private _uxService: UxService,
   ) {}
 
   ngOnInit(): void {
     this._clientsService.getData().subscribe((res) => {
       this.rowData = res;
     });
+    this.subscription = this._uxService.isMobile$.subscribe(isMobile => {
+      this.colDefs = colDefs(this, isMobile);
+    })
   }
 
   onCreate() {

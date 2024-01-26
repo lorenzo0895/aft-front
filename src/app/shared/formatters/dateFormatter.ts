@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 /**
  * @param format An optional string refering to moment.js formats. By default

@@ -1,0 +1,10 @@
+<div class="ag-grid-div">
+  <ag-grid-angular
+    class="ag-theme-material"
+    [columnDefs]="colDefs"
+    [rowData]="rowData"
+    [gridOptions]="gridOptions"
+    [style]="'height: 100%; width: 100%'"
+    (selectionChanged)="selected.next($event.api.getSelectedRows())"
+  ></ag-grid-angular>
+</div>

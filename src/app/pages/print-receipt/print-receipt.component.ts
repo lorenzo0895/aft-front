@@ -5,7 +5,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReceiptsService } from '@shared/services/receipts.service';
 import { ActivatedRoute } from '@angular/router';
 import { concatMap, map, Subscription, tap } from 'rxjs';
@@ -21,7 +20,6 @@ import { PrintDieComponent } from './components/print-die/print-die.component';
   selector: 'app-print-receipt',
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     PrintHeaderComponent,
     PrintGeneralComponent,

@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { clientToOptions } from '@shared/constants/clientsToOptions';
 import { ReceiptsComponent } from '@pages/receipts/receipts.component';
 import { ReceiptsItemsComponent } from '@pages/receipts-items/receipts-items.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { map } from 'rxjs';
 
 export const clientDateSearch = (

@@ -10,14 +10,7 @@ import { FloatWrapperComponent } from './float-wrapper/float-wrapper.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormlyModule.forChild({
-      // wrappers: [
-      //   {
-      //     name: 'form-field',
-      //     component: FormlyWrapperFormField,
-      //   },
-      // ],
-    }),
+    FormlyModule.forChild(),
   ],
 })
 export class FormlyWrapperFormFieldModule {}

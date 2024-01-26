@@ -1,19 +1,14 @@
 <p>
   {{props.label}}
-  <i
-    class="pi pi-plus-circle blue"
-    *ngIf="!props.disabled"
-    (click)="add()"
-  ></i>
+  @if (!props.disabled) {
+    <i class="pi pi-plus-circle blue" (click)="add()"></i>
+  }
 </p>
-<div
-  class="field-group"
-  *ngFor="let field of field.fieldGroup; let i = index;"
->
-  <formly-field [field]="field"></formly-field>
-  <i
-    *ngIf="!props.disabled && notOnlyOne()"
-    class="pi pi-minus-circle red"
-    (click)="remove(i)"
-  ></i>
-</div>
+@for (field of field.fieldGroup; track $index) {
+  <div class="field-group">
+    <formly-field [field]="field"></formly-field>
+    @if (!props.disabled && notOnlyOne()) {
+      <i class="pi pi-minus-circle red" (click)="remove($index)"></i>
+    }
+  </div>
+}
